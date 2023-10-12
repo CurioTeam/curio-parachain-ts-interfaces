@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -d '{"id":"1", "jsonrpc":"2.0", "method": "state_getMetadata", "params":[]}' https://dev.parachain.curioinvest.com:9933 > curio.json
