@@ -61,7 +61,6 @@ import type { BeefyKey, FullIdentification, IdentificationTuple, Keys, Membershi
 import type { Bid, BidKind, SocietyJudgement, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
 import type { ActiveEraInfo, CompactAssignments, CompactAssignmentsTo257, CompactAssignmentsTo265, CompactAssignmentsWith16, CompactAssignmentsWith24, CompactScore, CompactScoreCompact, ElectionCompute, ElectionPhase, ElectionResult, ElectionScore, ElectionSize, ElectionStatus, EraIndex, EraPoints, EraRewardPoints, EraRewards, Exposure, ExtendedBalance, Forcing, IndividualExposure, KeyType, MomentOf, Nominations, NominatorIndex, NominatorIndexCompact, OffchainAccuracy, OffchainAccuracyCompact, PhragmenScore, Points, RawSolution, RawSolutionTo265, RawSolutionWith16, RawSolutionWith24, ReadySolution, RewardDestination, RewardPoint, RoundSnapshot, SeatHolder, SignedSubmission, SignedSubmissionOf, SignedSubmissionTo276, SlashJournalEntry, SlashingSpans, SlashingSpansTo204, SolutionOrSnapshotSize, SolutionSupport, SolutionSupports, SpanIndex, SpanRecord, StakingLedger, StakingLedgerTo223, StakingLedgerTo240, SubmissionIndicesOf, Supports, UnappliedSlash, UnappliedSlashOther, UnlockChunk, ValidatorIndex, ValidatorIndexCompact, ValidatorPrefs, ValidatorPrefsTo145, ValidatorPrefsTo196, ValidatorPrefsWithBlocked, ValidatorPrefsWithCommission, VoteWeight, Voter } from '@polkadot/types/interfaces/staking';
 import type { ApiId, BlockTrace, BlockTraceEvent, BlockTraceEventData, BlockTraceSpan, KeyValueOption, MigrationStatusResult, ReadProof, RuntimeVersion, RuntimeVersionApi, RuntimeVersionPartial, RuntimeVersionPre3, RuntimeVersionPre4, SpecVersion, StorageChangeSet, TraceBlockResponse, TraceError } from '@polkadot/types/interfaces/state';
-import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
 import type { AccountInfo, AccountInfoWithDualRefCount, AccountInfoWithProviders, AccountInfoWithRefCount, AccountInfoWithRefCountU8, AccountInfoWithTripleRefCount, ApplyExtrinsicResult, ApplyExtrinsicResultPre6, ArithmeticError, BlockLength, BlockWeights, ChainProperties, ChainType, ConsumedWeight, DigestOf, DispatchClass, DispatchError, DispatchErrorModule, DispatchErrorModulePre6, DispatchErrorModuleU8, DispatchErrorModuleU8a, DispatchErrorPre6, DispatchErrorPre6First, DispatchErrorTo198, DispatchInfo, DispatchInfoTo190, DispatchInfoTo244, DispatchOutcome, DispatchOutcomePre6, DispatchResult, DispatchResultOf, DispatchResultTo198, Event, EventId, EventIndex, EventRecord, Health, InvalidTransaction, Key, LastRuntimeUpgradeInfo, NetworkState, NetworkStatePeerset, NetworkStatePeersetInfo, NodeRole, NotConnectedPeer, Peer, PeerEndpoint, PeerEndpointAddr, PeerInfo, PeerPing, PerDispatchClassU32, PerDispatchClassWeight, PerDispatchClassWeightsPerClass, Phase, RawOrigin, RefCount, RefCountTo259, SyncState, SystemOrigin, TokenError, TransactionValidityError, TransactionalError, UnknownTransaction, WeightPerClass } from '@polkadot/types/interfaces/system';
 import type { Bounty, BountyIndex, BountyStatus, BountyStatusActive, BountyStatusCuratorProposed, BountyStatusPendingPayout, OpenTip, OpenTipFinderTo225, OpenTipTip, OpenTipTo225, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
@@ -70,6 +69,9 @@ import type { ClassDetails, ClassId, ClassMetadata, DepositBalance, DepositBalan
 import type { Multisig, Timepoint } from '@polkadot/types/interfaces/utility';
 import type { VestingInfo } from '@polkadot/types/interfaces/vesting';
 import type { AssetInstance, AssetInstanceV0, AssetInstanceV1, AssetInstanceV2, BodyId, BodyPart, DoubleEncodedCall, Fungibility, FungibilityV0, FungibilityV1, FungibilityV2, InboundStatus, InstructionV2, InteriorMultiLocation, Junction, JunctionV0, JunctionV1, JunctionV2, Junctions, JunctionsV1, JunctionsV2, MultiAsset, MultiAssetFilter, MultiAssetFilterV1, MultiAssetFilterV2, MultiAssetV0, MultiAssetV1, MultiAssetV2, MultiAssets, MultiAssetsV1, MultiAssetsV2, MultiLocation, MultiLocationV0, MultiLocationV1, MultiLocationV2, NetworkId, OriginKindV0, OriginKindV1, OriginKindV2, OutboundStatus, Outcome, QueryId, QueryStatus, QueueConfigData, Response, ResponseV0, ResponseV1, ResponseV2, ResponseV2Error, ResponseV2Result, VersionMigrationStage, VersionedMultiAsset, VersionedMultiAssets, VersionedMultiLocation, VersionedResponse, VersionedXcm, WeightLimitV2, WildFungibility, WildFungibilityV0, WildFungibilityV1, WildFungibilityV2, WildMultiAsset, WildMultiAssetV1, WildMultiAssetV2, Xcm, XcmAssetId, XcmError, XcmErrorV0, XcmErrorV1, XcmErrorV2, XcmOrder, XcmOrderV0, XcmOrderV1, XcmOrderV2, XcmOrigin, XcmOriginKind, XcmV0, XcmV1, XcmV2, XcmVersion, XcmpMessageFormat } from '@polkadot/types/interfaces/xcm';
+import type { ProvisionParameters, TradingPairStatus } from 'curio-parachain-ts-interfaces/interfaces/dex';
+import type { Amount, CurrencyId, DexShare, TokenSymbol, TradingPair } from 'curio-parachain-ts-interfaces/interfaces/primitives';
+import type { ExchangeRate, Ratio } from 'curio-parachain-ts-interfaces/interfaces/support';
 
 declare module '@polkadot/types/types/registry' {
   interface InterfaceTypes {
@@ -102,6 +104,7 @@ declare module '@polkadot/types/types/registry' {
     Address: Address;
     AliveContractInfo: AliveContractInfo;
     AllowedSlots: AllowedSlots;
+    Amount: Amount;
     AnySignature: AnySignature;
     ApiId: ApiId;
     ApplyExtrinsicResult: ApplyExtrinsicResult;
@@ -324,6 +327,7 @@ declare module '@polkadot/types/types/registry' {
     CoreState: CoreState;
     CrateVersion: CrateVersion;
     CreatedBlock: CreatedBlock;
+    CurrencyId: CurrencyId;
     Data: Data;
     DeferredOffenceOf: DeferredOffenceOf;
     DefunctVoter: DefunctVoter;
@@ -335,6 +339,7 @@ declare module '@polkadot/types/types/registry' {
     DepositBalance: DepositBalance;
     DepositBalanceOf: DepositBalanceOf;
     DestroyWitness: DestroyWitness;
+    DexShare: DexShare;
     Digest: Digest;
     DigestItem: DigestItem;
     DigestOf: DigestOf;
@@ -444,6 +449,7 @@ declare module '@polkadot/types/types/registry' {
     EvmCreateInfo: EvmCreateInfo;
     EvmLog: EvmLog;
     EvmVicinity: EvmVicinity;
+    ExchangeRate: ExchangeRate;
     ExecReturnValue: ExecReturnValue;
     ExecutorParam: ExecutorParam;
     ExecutorParams: ExecutorParams;
@@ -824,6 +830,7 @@ declare module '@polkadot/types/types/registry' {
     PropIndex: PropIndex;
     Proposal: Proposal;
     ProposalIndex: ProposalIndex;
+    ProvisionParameters: ProvisionParameters;
     ProxyAnnouncement: ProxyAnnouncement;
     ProxyDefinition: ProxyDefinition;
     ProxyState: ProxyState;
@@ -836,6 +843,7 @@ declare module '@polkadot/types/types/registry' {
     QueueConfigData: QueueConfigData;
     QueuedParathread: QueuedParathread;
     Randomness: Randomness;
+    Ratio: Ratio;
     Raw: Raw;
     RawAuraPreDigest: RawAuraPreDigest;
     RawBabePreDigest: RawBabePreDigest;
@@ -1084,9 +1092,12 @@ declare module '@polkadot/types/types/registry' {
     Text: Text;
     Timepoint: Timepoint;
     TokenError: TokenError;
+    TokenSymbol: TokenSymbol;
     TombstoneContractInfo: TombstoneContractInfo;
     TraceBlockResponse: TraceBlockResponse;
     TraceError: TraceError;
+    TradingPair: TradingPair;
+    TradingPairStatus: TradingPairStatus;
     TransactionalError: TransactionalError;
     TransactionInfo: TransactionInfo;
     TransactionLongevity: TransactionLongevity;
@@ -1179,7 +1190,6 @@ declare module '@polkadot/types/types/registry' {
     WeightLimitV2: WeightLimitV2;
     WeightMultiplier: WeightMultiplier;
     WeightPerClass: WeightPerClass;
-    WeightToFeeCoefficient: WeightToFeeCoefficient;
     WeightV0: WeightV0;
     WeightV1: WeightV1;
     WeightV2: WeightV2;
