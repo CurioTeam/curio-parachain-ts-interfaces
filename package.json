@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "yarn generate:defs && yarn generate:meta",
-    "generate:defs": "node --experimental-specifier-resolution=node --loader ts-node/esm node_modules/.bin/polkadot-types-from-defs --package ./ --input ./src/interfaces --endpoint ./curio.json",
-    "generate:meta": "node --experimental-specifier-resolution=node --loader ts-node/esm node_modules/.bin/polkadot-types-from-chain --package ./ --endpoint ./curio.json --output ./src/interfaces",
+    "generate:defs": "node --experimental-specifier-resolution=node --loader ts-node/esm node_modules/.bin/polkadot-types-from-defs --package . --input ./src/interfaces --endpoint ./curio.json",
+    "generate:meta": "node --experimental-specifier-resolution=node --loader ts-node/esm node_modules/.bin/polkadot-types-from-chain --package . --endpoint ./curio.json --output ./src/interfaces",
     "lint": "tsc --noEmit --pretty"
   },
   "author": "",
