@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
 import type { Option, U8aFixed, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec, ITuple } from '@polkadot/types-codec/types';
 import type { Percent, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CurioDevnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
+import type { CurioMainnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
 
@@ -82,21 +82,7 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     bridge: {
-      getNativeCurrencyId: CurioDevnetRuntimeCurrencyId & AugmentedConst<ApiType>;
-      /**
-       * Generic const
-       **/
-      [key: string]: Codec;
-    };
-    common: {
-      /**
-       * Maximum admins per collection.
-       **/
-      collectionAdminsLimit: u32 & AugmentedConst<ApiType>;
-      /**
-       * Set price to create a collection.
-       **/
-      collectionCreationPrice: u128 & AugmentedConst<ApiType>;
+      getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -106,7 +92,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The native currency id
        **/
-      getNativeCurrencyId: CurioDevnetRuntimeCurrencyId & AugmentedConst<ApiType>;
+      getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/

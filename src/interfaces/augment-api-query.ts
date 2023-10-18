@@ -10,7 +10,7 @@ import type { Data } from '@polkadot/types';
 import type { BTreeMap, Bytes, Option, U8aFixed, Vec, bool, u128, u16, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, Call, H160, H256 } from '@polkadot/types/interfaces/runtime';
-import type { CollectionPrimitivesCollection, CollectionPrimitivesCollectionStats, CollectionPrimitivesProperties, CollectionPrimitivesPropertiesMapPropertyPermission, CollectionPrimitivesTokenChild, CumulusPalletDmpQueueConfigData, CumulusPalletDmpQueuePageIndexData, CumulusPalletParachainSystemRelayStateSnapshotMessagingStateSnapshot, CumulusPalletXcmpQueueInboundChannelDetails, CumulusPalletXcmpQueueOutboundChannelDetails, CumulusPalletXcmpQueueQueueConfigData, CurioDevnetRuntimeCurrencyId, CurioDevnetRuntimeSessionKeys, FrameSupportDispatchPerDispatchClassWeight, FrameSupportPreimagesBounded, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesReserveData, PalletBountiesBounty, PalletCollectiveVotes, PalletDemocracyMetadataOwner, PalletDemocracyReferendumInfo, PalletDemocracyVoteThreshold, PalletDemocracyVoteVoting, PalletDexTradingPair, PalletDexTradingPairStatus, PalletElectionsPhragmenSeatHolder, PalletElectionsPhragmenVoter, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletMultisigMultisig, PalletPreimageRequestStatus, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletSchedulerScheduled, PalletTipsOpenTip, PalletTransactionPaymentReleases, PalletTreasuryProposal, PalletVestingReleases, PalletVestingVestingInfo, PalletWhitelistInvestor, ParachainStakingCandidate, ParachainStakingDelegationCounter, ParachainStakingInflationInflationInfo, ParachainStakingRoundInfo, ParachainStakingSetOrderedSet, ParachainStakingStake, ParachainStakingTotalStake, PhantomTypeDataStructs, PolkadotCorePrimitivesOutboundHrmpMessage, PolkadotPrimitivesV2AbridgedHostConfiguration, PolkadotPrimitivesV2PersistedValidationData, PolkadotPrimitivesV2UpgradeRestriction, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest, SpTrieStorageProof, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
+import type { CumulusPalletDmpQueueConfigData, CumulusPalletDmpQueuePageIndexData, CumulusPalletParachainSystemRelayStateSnapshotMessagingStateSnapshot, CumulusPalletXcmpQueueInboundChannelDetails, CumulusPalletXcmpQueueOutboundChannelDetails, CumulusPalletXcmpQueueQueueConfigData, CurioMainnetRuntimeConsensusSessionKeys, CurioMainnetRuntimeCurrencyId, FrameSupportDispatchPerDispatchClassWeight, FrameSupportPreimagesBounded, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesReserveData, PalletBountiesBounty, PalletCollectiveVotes, PalletDemocracyMetadataOwner, PalletDemocracyReferendumInfo, PalletDemocracyVoteThreshold, PalletDemocracyVoteVoting, PalletDexTradingPair, PalletDexTradingPairStatus, PalletElectionsPhragmenSeatHolder, PalletElectionsPhragmenVoter, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletMultisigMultisig, PalletPreimageRequestStatus, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletSchedulerScheduled, PalletTipsOpenTip, PalletTransactionPaymentReleases, PalletTreasuryProposal, PalletVestingReleases, PalletVestingVestingInfo, ParachainStakingCandidate, ParachainStakingDelegationCounter, ParachainStakingInflationInflationInfo, ParachainStakingRoundInfo, ParachainStakingSetOrderedSet, ParachainStakingStake, ParachainStakingTotalStake, PolkadotCorePrimitivesOutboundHrmpMessage, PolkadotPrimitivesV2AbridgedHostConfiguration, PolkadotPrimitivesV2PersistedValidationData, PolkadotPrimitivesV2UpgradeRestriction, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest, SpTrieStorageProof, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<ApiType, () => unknown>;
@@ -131,7 +131,7 @@ declare module '@polkadot/api-base/types/storage' {
       [key: string]: QueryableStorageEntry<ApiType>;
     };
     bridge: {
-      currencyMap: AugmentedQuery<ApiType, (arg: CurioDevnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Option<ITuple<[H160, bool]>>>, [CurioDevnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioDevnetRuntimeCurrencyId]>;
+      currencyMap: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Option<ITuple<[H160, bool]>>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
       ethBlacklisted: AugmentedQuery<ApiType, (arg: H160 | string | Uint8Array) => Observable<bool>, [H160]> & QueryableStorageEntry<ApiType, [H160]>;
       inRequestStatus: AugmentedQuery<ApiType, (arg: u128 | AnyNumber | Uint8Array) => Observable<bool>, [u128]> & QueryableStorageEntry<ApiType, [u128]>;
       managers: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<bool>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
@@ -139,60 +139,7 @@ declare module '@polkadot/api-base/types/storage' {
       outRequestId: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       paused: AugmentedQuery<ApiType, () => Observable<bool>, []> & QueryableStorageEntry<ApiType, []>;
       subBlacklisted: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<bool>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
-      tokenMap: AugmentedQuery<ApiType, (arg: H160 | string | Uint8Array) => Observable<Option<CurioDevnetRuntimeCurrencyId>>, [H160]> & QueryableStorageEntry<ApiType, [H160]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    charging: {
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    common: {
-      /**
-       * Storage of the amount of collection admins.
-       **/
-      adminAmount: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u32>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Storage of collection info.
-       **/
-      collectionById: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<CollectionPrimitivesCollection>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Storage of collection properties.
-       **/
-      collectionProperties: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<CollectionPrimitivesProperties>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Storage of the count of created collections. Essentially contains the last collection ID.
-       **/
-      createdCollectionCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * (Collection id (controlled?2), who created (real))
-       * TODO: Off chain worker should remove from this map when collection gets removed
-       **/
-      createItemBasket: AugmentedQuery<ApiType, (arg: ITuple<[u32, AccountId32]> | [u32 | AnyNumber | Uint8Array, AccountId32 | string | Uint8Array]) => Observable<Option<u64>>, [ITuple<[u32, AccountId32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, AccountId32]>]>;
-      /**
-       * Storage of the count of deleted collections.
-       **/
-      destroyedCollectionCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Not used by code, exists only to provide some types to metadata.
-       **/
-      dummyStorageValue: AugmentedQuery<ApiType, () => Observable<Option<ITuple<[CollectionPrimitivesCollectionStats, u32, u32, CollectionPrimitivesTokenChild, PhantomTypeDataStructs]>>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * List of collection admins.
-       **/
-      isAdmin: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: AccountId32 | string | Uint8Array) => Observable<bool>, [u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, AccountId32]>;
-      /**
-       * Storage of property permissions of a collection.
-       **/
-      propertyPermissions: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<CollectionPrimitivesPropertiesMapPropertyPermission>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Last sponsoring of token property setting // todo:doc rephrase this and the following
-       **/
-      tokenPropertyBasket: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<Option<u64>>, [u32, u32]> & QueryableStorageEntry<ApiType, [u32, u32]>;
+      tokenMap: AugmentedQuery<ApiType, (arg: H160 | string | Uint8Array) => Observable<Option<CurioMainnetRuntimeCurrencyId>>, [H160]> & QueryableStorageEntry<ApiType, [H160]>;
       /**
        * Generic query
        **/
@@ -223,6 +170,12 @@ declare module '@polkadot/api-base/types/storage' {
        * Votes on a given proposal, if it is ongoing.
        **/
       voting: AugmentedQuery<ApiType, (arg: H256 | string | Uint8Array) => Observable<Option<PalletCollectiveVotes>>, [H256]> & QueryableStorageEntry<ApiType, [H256]>;
+      /**
+       * Generic query
+       **/
+      [key: string]: QueryableStorageEntry<ApiType>;
+    };
+    currencies: {
       /**
        * Generic query
        **/
@@ -729,52 +682,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
-    refungible: {
-      /**
-       * Amount of tokens (not pieces) partially owned by an account within a collection.
-       **/
-      accountBalance: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: AccountId32 | string | Uint8Array) => Observable<u32>, [u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, AccountId32]>;
-      /**
-       * Allowance set by a token owner for another user to perform one of certain transactions on a number of pieces of a token.
-       **/
-      allowance: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array, arg3: AccountId32 | string | Uint8Array, arg4: AccountId32 | string | Uint8Array) => Observable<u128>, [u32, u32, AccountId32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, u32, AccountId32, AccountId32]>;
-      /**
-       * Amount of token pieces owned by account.
-       **/
-      balance: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array, arg3: AccountId32 | string | Uint8Array) => Observable<u128>, [u32, u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, u32, AccountId32]>;
-      /**
-       * Used to enumerate tokens owned by account.
-       **/
-      owned: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: AccountId32 | string | Uint8Array, arg3: u32 | AnyNumber | Uint8Array) => Observable<bool>, [u32, AccountId32, u32]> & QueryableStorageEntry<ApiType, [u32, AccountId32, u32]>;
-      /**
-       * Last sponsoring of RFT approval in a collection
-       **/
-      refungibleApproveBasket: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array, arg3: AccountId32 | string | Uint8Array) => Observable<Option<u64>>, [u32, u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, u32, AccountId32]>;
-      /**
-       * Collection id (controlled?2), token id (controlled?2)
-       **/
-      refungibleTransferBasket: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array, arg3: AccountId32 | string | Uint8Array) => Observable<Option<u64>>, [u32, u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, u32, AccountId32]>;
-      /**
-       * Amount of pieces a refungible token is split into.
-       **/
-      tokenProperties: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<CollectionPrimitivesProperties>, [u32, u32]> & QueryableStorageEntry<ApiType, [u32, u32]>;
-      /**
-       * Amount of tokens burnt in a collection.
-       **/
-      tokensBurnt: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u32>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Total amount of minted tokens in a collection.
-       **/
-      tokensMinted: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u32>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Total amount of pieces for token
-       **/
-      totalSupply: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<u128>, [u32, u32]> & QueryableStorageEntry<ApiType, [u32, u32]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
     scheduler: {
       /**
        * Items to be executed, indexed by the block number that they should be executed on.
@@ -813,7 +720,7 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * The next session keys for a validator.
        **/
-      nextKeys: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<CurioDevnetRuntimeSessionKeys>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
+      nextKeys: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<CurioMainnetRuntimeConsensusSessionKeys>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * True if the underlying economic identities or weighting behind the validators
        * has changed in the queued validator set.
@@ -823,7 +730,7 @@ declare module '@polkadot/api-base/types/storage' {
        * The queued keys for the next session. When the next session begins, these keys
        * will be used to determine the validator's session keys.
        **/
-      queuedKeys: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AccountId32, CurioDevnetRuntimeSessionKeys]>>>, []> & QueryableStorageEntry<ApiType, []>;
+      queuedKeys: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AccountId32, CurioMainnetRuntimeConsensusSessionKeys]>>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * The current set of validators.
        **/
@@ -1013,20 +920,20 @@ declare module '@polkadot/api-base/types/storage' {
        * NOTE: This is only used in the case that this module is used to store
        * balances.
        **/
-      accounts: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioDevnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<OrmlTokensAccountData>, [AccountId32, CurioDevnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioDevnetRuntimeCurrencyId]>;
+      accounts: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<OrmlTokensAccountData>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * Any liquidity locks of a token type under an account.
        * NOTE: Should only be accessed when setting, changing and freeing a lock.
        **/
-      locks: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioDevnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensBalanceLock>>, [AccountId32, CurioDevnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioDevnetRuntimeCurrencyId]>;
+      locks: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensBalanceLock>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * Named reserves on some account balances.
        **/
-      reserves: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioDevnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensReserveData>>, [AccountId32, CurioDevnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioDevnetRuntimeCurrencyId]>;
+      reserves: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensReserveData>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * The total issuance of a token type.
        **/
-      totalIssuance: AugmentedQuery<ApiType, (arg: CurioDevnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<u128>, [CurioDevnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioDevnetRuntimeCurrencyId]>;
+      totalIssuance: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | string | Uint8Array) => Observable<u128>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
       /**
        * Generic query
        **/
@@ -1073,28 +980,6 @@ declare module '@polkadot/api-base/types/storage' {
        * Information regarding the vesting of a given account.
        **/
       vesting: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<Vec<PalletVestingVestingInfo>>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    whitelist: {
-      /**
-       * Admins accounts
-       **/
-      admins: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<bool>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
-      /**
-       * [InvestorKey] mappend to [Investor]
-       **/
-      investors: AugmentedQuery<ApiType, (arg: U8aFixed | string | Uint8Array) => Observable<Option<PalletWhitelistInvestor>>, [U8aFixed]> & QueryableStorageEntry<ApiType, [U8aFixed]>;
-      /**
-       * Investor's AccountId mapped to [InvestorKey]
-       **/
-      keysOfInvestors: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<U8aFixed>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
-      /**
-       * Managers accounts
-       **/
-      managers: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<bool>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Generic query
        **/
