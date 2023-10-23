@@ -5,6 +5,7 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/api-base/types/calls';
 
+import type { StakingRates } from './staking';
 import type { ApiTypes, AugmentedCall, DecoratedCallBase } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Vec, u32 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
@@ -15,7 +16,7 @@ import type { CollationInfo } from '@polkadot/types/interfaces/cumulus';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { OpaqueMetadata } from '@polkadot/types/interfaces/metadata';
 import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
-import type { AccountId, Balance, Block, Call, Header, Index, KeyTypeId, SlotDuration, Weight } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountId32, Balance, Block, Call, Header, Index, KeyTypeId, SlotDuration, Weight } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult } from '@polkadot/types/interfaces/system';
 import type { TransactionSource, TransactionValidity } from '@polkadot/types/interfaces/txqueue';
@@ -137,6 +138,25 @@ declare module '@polkadot/api-base/types/calls' {
        * Generate a set of session keys with optionally using the given seed.
        **/
       generateSessionKeys: AugmentedCall<ApiType, (seed: Option<Bytes> | null | Uint8Array | Bytes | string) => Observable<Bytes>>;
+      /**
+       * Generic call
+       **/
+      [key: string]: DecoratedCallBase<ApiType>;
+    };
+    /** 0x45bfba51a310b223/1 */
+    staking: {
+      /**
+       * Provides a sorted list of collators most suited for given delegator's stake amount determined with some heuristic algorithm.
+       **/
+      getSortedProposedCandidates: AugmentedCall<ApiType, (balance: Balance | AnyNumber | Uint8Array) => Observable<Vec<AccountId>>>;
+      /**
+       * Calculate the current staking and reward rates for collators and delegators
+       **/
+      getStakingRates: AugmentedCall<ApiType, () => Observable<StakingRates>>;
+      /**
+       * Calculate the claimable staking rewards for a given account address
+       **/
+      getUnclaimedStakingRewards: AugmentedCall<ApiType, (account: AccountId32 | string | Uint8Array) => Observable<Balance>>;
       /**
        * Generic call
        **/
