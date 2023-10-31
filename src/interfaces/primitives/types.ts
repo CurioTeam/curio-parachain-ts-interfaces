@@ -26,9 +26,24 @@ export interface DexShare extends Enum {
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
   readonly isCgt: boolean;
+  readonly isDot: boolean;
+  readonly isKsm: boolean;
+  readonly isUnq: boolean;
+  readonly isQtz: boolean;
+  readonly isGlmr: boolean;
+  readonly isMovr: boolean;
+  readonly isEth: boolean;
   readonly isDai: boolean;
+  readonly isUsdt: boolean;
+  readonly isUsdc: boolean;
+  readonly isBtc: boolean;
+  readonly isAvax: boolean;
+  readonly isSol: boolean;
+  readonly isAurora: boolean;
+  readonly isNear: boolean;
   readonly isWct1: boolean;
-  readonly type: 'Cgt' | 'Dai' | 'Wct1';
+  readonly isTon: boolean;
+  readonly type: 'Cgt' | 'Dot' | 'Ksm' | 'Unq' | 'Qtz' | 'Glmr' | 'Movr' | 'Eth' | 'Dai' | 'Usdt' | 'Usdc' | 'Btc' | 'Avax' | 'Sol' | 'Aurora' | 'Near' | 'Wct1' | 'Ton';
 }
 
 /** @name TradingPair */
