@@ -6,10 +6,10 @@
 import '@polkadot/api-base/types/events';
 
 import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
-import type { Null, Option, Result, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
+import type { Bytes, Null, Option, Result, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, H160, H256, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeUtilitiesProxyType, FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, PalletDemocracyMetadataOwner, PalletDemocracyVoteAccountVote, PalletDemocracyVoteThreshold, PalletDexTradingPair, PalletMultisigTimepoint, SpRuntimeDispatchError, SpWeightsWeightV2Weight, XcmV3MultiLocation, XcmV3MultiassetMultiAssets, XcmV3Response, XcmV3TraitsError, XcmV3TraitsOutcome, XcmV3Xcm, XcmVersionedMultiAssets, XcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeUtilitiesProxyType, FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, PalletDemocracyMetadataOwner, PalletDemocracyVoteAccountVote, PalletDemocracyVoteThreshold, PalletDexTradingPair, PalletIncentivesPoolId, PalletMultisigTimepoint, SpRuntimeDispatchError, SpWeightsWeightV2Weight, XcmV3MultiLocation, XcmV3MultiassetMultiAssets, XcmV3Response, XcmV3TraitsError, XcmV3TraitsOutcome, XcmV3Xcm, XcmVersionedMultiAssets, XcmVersionedMultiLocation } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -19,7 +19,11 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A balance was set by root.
        **/
-      BalanceSet: AugmentedEvent<ApiType, [who: AccountId32, free: u128, reserved: u128], { who: AccountId32, free: u128, reserved: u128 }>;
+      BalanceSet: AugmentedEvent<ApiType, [who: AccountId32, free: u128], { who: AccountId32, free: u128 }>;
+      /**
+       * Some amount was burned from an account.
+       **/
+      Burned: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
       /**
        * Some amount was deposited (e.g. for transaction fees).
        **/
@@ -34,6 +38,26 @@ declare module '@polkadot/api-base/types/events' {
        **/
       Endowed: AugmentedEvent<ApiType, [account: AccountId32, freeBalance: u128], { account: AccountId32, freeBalance: u128 }>;
       /**
+       * Some balance was frozen.
+       **/
+      Frozen: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * Total issuance was increased by `amount`, creating a credit to be balanced.
+       **/
+      Issued: AugmentedEvent<ApiType, [amount: u128], { amount: u128 }>;
+      /**
+       * Some balance was locked.
+       **/
+      Locked: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * Some amount was minted into an account.
+       **/
+      Minted: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * Total issuance was decreased by `amount`, creating a debt to be balanced.
+       **/
+      Rescinded: AugmentedEvent<ApiType, [amount: u128], { amount: u128 }>;
+      /**
        * Some balance was reserved (moved from free to reserved).
        **/
       Reserved: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
@@ -43,17 +67,37 @@ declare module '@polkadot/api-base/types/events' {
        **/
       ReserveRepatriated: AugmentedEvent<ApiType, [from: AccountId32, to: AccountId32, amount: u128, destinationStatus: FrameSupportTokensMiscBalanceStatus], { from: AccountId32, to: AccountId32, amount: u128, destinationStatus: FrameSupportTokensMiscBalanceStatus }>;
       /**
+       * Some amount was restored into an account.
+       **/
+      Restored: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
        * Some amount was removed from the account (e.g. for misbehavior).
        **/
       Slashed: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * Some amount was suspended from an account (it can be restored later).
+       **/
+      Suspended: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * Some balance was thawed.
+       **/
+      Thawed: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
       /**
        * Transfer succeeded.
        **/
       Transfer: AugmentedEvent<ApiType, [from: AccountId32, to: AccountId32, amount: u128], { from: AccountId32, to: AccountId32, amount: u128 }>;
       /**
+       * Some balance was unlocked.
+       **/
+      Unlocked: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
        * Some balance was unreserved (moved from reserved to free).
        **/
       Unreserved: AugmentedEvent<ApiType, [who: AccountId32, amount: u128], { who: AccountId32, amount: u128 }>;
+      /**
+       * An account was upgraded.
+       **/
+      Upgraded: AugmentedEvent<ApiType, [who: AccountId32], { who: AccountId32 }>;
       /**
        * Some amount was withdrawn from the account (e.g. for transaction fees).
        **/
@@ -98,17 +142,61 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     bridge: {
+      /**
+       * The Ethereum account added to blacklist.
+       **/
       BlacklistedEth: AugmentedEvent<ApiType, [account: H160], { account: H160 }>;
+      /**
+       * The Substrate account added to blacklist.
+       **/
       BlacklistedSub: AugmentedEvent<ApiType, [account: AccountId32], { account: AccountId32 }>;
+      /**
+       * The tokens to be bridged have been burned.
+       **/
       Burn: AugmentedEvent<ApiType, [requestId: u128, from: AccountId32, to: H160, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], { requestId: u128, from: AccountId32, to: H160, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128 }>;
+      /**
+       * The currency added.
+       **/
+      CurrencyAdded: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], { id: CurioMainnetRuntimeCurrencyId }>;
+      /**
+       * The currency paused.
+       **/
       CurrencyPaused: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], { id: CurioMainnetRuntimeCurrencyId }>;
+      /**
+       * The currency removed.
+       **/
+      CurrencyRemoved: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], { id: CurioMainnetRuntimeCurrencyId }>;
+      /**
+       * The currency not paused.
+       **/
       CurrencyUnpaused: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], { id: CurioMainnetRuntimeCurrencyId }>;
+      /**
+       * The bridge manager added.
+       **/
       ManagerAdded: AugmentedEvent<ApiType, [manager: AccountId32], { manager: AccountId32 }>;
+      /**
+       * The bridge manager removed.
+       **/
       ManagerRemoved: AugmentedEvent<ApiType, [manager: AccountId32], { manager: AccountId32 }>;
+      /**
+       * The bridge tokens have been deposited.
+       **/
       Mint: AugmentedEvent<ApiType, [requestId: u128, to: AccountId32, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], { requestId: u128, to: AccountId32, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128 }>;
+      /**
+       * The bridge operation is (already or still) paused.
+       **/
       Paused: AugmentedEvent<ApiType, []>;
+      /**
+       * The Ethereum account removed from blacklist.
+       **/
       RemovedFromBlacklistEth: AugmentedEvent<ApiType, [account: H160], { account: H160 }>;
+      /**
+       * The Substrate account removed from blacklist.
+       **/
       RemovedFromBlacklistSub: AugmentedEvent<ApiType, [account: AccountId32], { account: AccountId32 }>;
+      /**
+       * The bridge operation is (already or still) resumed.
+       **/
       Unpaused: AugmentedEvent<ApiType, []>;
       /**
        * Generic event
@@ -438,6 +526,32 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
+    incentives: {
+      /**
+       * Payout deduction rate updated.
+       **/
+      ClaimRewardDeductionRateUpdated: AugmentedEvent<ApiType, [pool: PalletIncentivesPoolId, deductionRate: u128], { pool: PalletIncentivesPoolId, deductionRate: u128 }>;
+      /**
+       * Claim rewards.
+       **/
+      ClaimRewards: AugmentedEvent<ApiType, [who: AccountId32, pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, actualAmount: u128, deductionAmount: u128], { who: AccountId32, pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, actualAmount: u128, deductionAmount: u128 }>;
+      /**
+       * Deposit DEX share.
+       **/
+      DepositDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, deposit: u128], { who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, deposit: u128 }>;
+      /**
+       * Incentive reward amount updated.
+       **/
+      IncentiveRewardAmountUpdated: AugmentedEvent<ApiType, [pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, rewardAmountPerPeriod: u128], { pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, rewardAmountPerPeriod: u128 }>;
+      /**
+       * Withdraw DEX share.
+       **/
+      WithdrawDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, withdraw: u128], { who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, withdraw: u128 }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
     indices: {
       /**
        * A account index was assigned.
@@ -631,6 +745,28 @@ declare module '@polkadot/api-base/types/events' {
        * The validation function has been scheduled to apply.
        **/
       ValidationFunctionStored: AugmentedEvent<ApiType, []>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    pausing: {
+      /**
+       * Paused EVM precompile
+       **/
+      EvmPrecompilePaused: AugmentedEvent<ApiType, [address: H160], { address: H160 }>;
+      /**
+       * Unpaused EVM precompile
+       **/
+      EvmPrecompileUnpaused: AugmentedEvent<ApiType, [address: H160], { address: H160 }>;
+      /**
+       * Paused transaction
+       **/
+      TransactionPaused: AugmentedEvent<ApiType, [palletNameBytes: Bytes, functionNameBytes: Bytes], { palletNameBytes: Bytes, functionNameBytes: Bytes }>;
+      /**
+       * Unpaused transaction
+       **/
+      TransactionUnpaused: AugmentedEvent<ApiType, [palletNameBytes: Bytes, functionNameBytes: Bytes], { palletNameBytes: Bytes, functionNameBytes: Bytes }>;
       /**
        * Generic event
        **/
