@@ -8,7 +8,7 @@ import '@polkadot/api-base/types/consts';
 import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
 import type { Option, U8aFixed, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec, ITuple } from '@polkadot/types-codec/types';
-import type { Percent, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
+import type { AccountId32, Percent, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
 import type { CurioMainnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
@@ -17,9 +17,24 @@ declare module '@polkadot/api-base/types/consts' {
   interface AugmentedConsts<ApiType extends ApiTypes> {
     balances: {
       /**
-       * The minimum amount required to keep an account open.
+       * The minimum amount required to keep an account open. MUST BE GREATER THAN ZERO!
+       * 
+       * If you *really* need it to be zero, you can enable the feature `insecure_zero_ed` for
+       * this pallet. However, you do so at your own risk: this will open up a major DoS vector.
+       * In case you have multiple sources of provider references, you may also get unexpected
+       * behaviour if you set this to zero.
+       * 
+       * Bottom line: Do yourself a favour and make it at least one!
        **/
       existentialDeposit: u128 & AugmentedConst<ApiType>;
+      /**
+       * The maximum number of individual freeze locks that can exist on an account at any time.
+       **/
+      maxFreezes: u32 & AugmentedConst<ApiType>;
+      /**
+       * The maximum number of holds that can exist on an account at any time.
+       **/
+      maxHolds: u32 & AugmentedConst<ApiType>;
       /**
        * The maximum number of locks that should exist on an account.
        * Not strictly enforced, but used for weight estimation.
@@ -82,7 +97,20 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     bridge: {
+      /**
+       * The native currency identifier.
+       **/
       getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    council: {
+      /**
+       * The maximum weight of a dispatch call that can be proposed and executed.
+       **/
+      maxProposalWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -288,6 +316,24 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    incentives: {
+      /**
+       * The period to accumulate rewards
+       **/
+      accumulatePeriod: u64 & AugmentedConst<ApiType>;
+      /**
+       * The module id, keep DexShare LP.
+       **/
+      palletId: FrameSupportPalletId & AugmentedConst<ApiType>;
+      /**
+       * The source account for native token rewards.
+       **/
+      rewardsSource: AccountId32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     indices: {
       /**
        * The deposit needed for reserving an index.
@@ -464,6 +510,10 @@ declare module '@polkadot/api-base/types/consts' {
       maximumWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
       /**
        * The maximum number of scheduled calls in the queue for a single block.
+       * 
+       * NOTE:
+       * + Dependent pallets' benchmarks might require a higher limit for the setting. Set a
+       * higher limit under `runtime-benchmarks` feature.
        **/
       maxScheduledPerBlock: u32 & AugmentedConst<ApiType>;
       /**
@@ -500,6 +550,16 @@ declare module '@polkadot/api-base/types/consts' {
        * Get the chain's current version.
        **/
       version: SpVersionRuntimeVersion & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    technicalCommittee: {
+      /**
+       * The maximum weight of a dispatch call that can be proposed and executed.
+       **/
+      maxProposalWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/

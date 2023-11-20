@@ -13,35 +13,43 @@ declare module '@polkadot/api-base/types/errors' {
   interface AugmentedErrors<ApiType extends ApiTypes> {
     balances: {
       /**
-       * Beneficiary account must pre-exist
+       * Beneficiary account must pre-exist.
        **/
       DeadAccount: AugmentedError<ApiType>;
       /**
-       * Value too low to create account due to existential deposit
+       * Value too low to create account due to existential deposit.
        **/
       ExistentialDeposit: AugmentedError<ApiType>;
       /**
-       * A vesting schedule already exists for this account
+       * A vesting schedule already exists for this account.
        **/
       ExistingVestingSchedule: AugmentedError<ApiType>;
+      /**
+       * Transfer/payment would kill account.
+       **/
+      Expendability: AugmentedError<ApiType>;
       /**
        * Balance too low to send value.
        **/
       InsufficientBalance: AugmentedError<ApiType>;
       /**
-       * Transfer/payment would kill account
-       **/
-      KeepAlive: AugmentedError<ApiType>;
-      /**
-       * Account liquidity restrictions prevent withdrawal
+       * Account liquidity restrictions prevent withdrawal.
        **/
       LiquidityRestrictions: AugmentedError<ApiType>;
       /**
-       * Number of named reserves exceed MaxReserves
+       * Number of freezes exceed `MaxFreezes`.
+       **/
+      TooManyFreezes: AugmentedError<ApiType>;
+      /**
+       * Number of holds exceed `MaxHolds`.
+       **/
+      TooManyHolds: AugmentedError<ApiType>;
+      /**
+       * Number of named reserves exceed `MaxReserves`.
        **/
       TooManyReserves: AugmentedError<ApiType>;
       /**
-       * Vesting balance too high to send value
+       * Vesting balance too high to send value.
        **/
       VestingBalance: AugmentedError<ApiType>;
       /**
@@ -101,25 +109,89 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     bridge: {
+      /**
+       * The Ethereum account is already blacklisted.
+       **/
       AlreadyBlacklistedEth: AugmentedError<ApiType>;
+      /**
+       * The Substrate account is already blacklisted.
+       **/
       AlreadyBlacklistedSub: AugmentedError<ApiType>;
+      /**
+       * The account is already a bridge manager.
+       **/
       AlreadyManager: AugmentedError<ApiType>;
+      /**
+       * The Ethereum account is not already blacklisted.
+       **/
       AlreadyNotBlacklistedEth: AugmentedError<ApiType>;
+      /**
+       * The Substrate account is not already blacklisted.
+       **/
       AlreadyNotBlacklistedSub: AugmentedError<ApiType>;
+      /**
+       * The account is not already a bridge manager.
+       **/
       AlreadyNotManager: AugmentedError<ApiType>;
+      /**
+       * The bridge is not already paused.
+       **/
       AlreadyNotPaused: AugmentedError<ApiType>;
+      /**
+       * The bridge has already been paused.
+       **/
       AlreadyPaused: AugmentedError<ApiType>;
+      /**
+       * The bridge is paused.
+       **/
       BridgePaused: AugmentedError<ApiType>;
+      /**
+       * The currency is not already paused.
+       **/
       CurrencyAlreadyNotPaused: AugmentedError<ApiType>;
+      /**
+       * The currency has already been paused.
+       **/
       CurrencyAlreadyPaused: AugmentedError<ApiType>;
+      /**
+       * The currency is already supported.
+       **/
+      CurrencyAlreadySupported: AugmentedError<ApiType>;
+      /**
+       * The currency is paused.
+       **/
       CurrencyNotActive: AugmentedError<ApiType>;
+      /**
+       * The currency is not paused.
+       **/
       CurrencyNotPaused: AugmentedError<ApiType>;
+      /**
+       * The currency is not supported.
+       **/
       CurrencyNotSupported: AugmentedError<ApiType>;
+      /**
+       * The Ethereum account is blacklisted.
+       **/
       EthAccountBlacklisted: AugmentedError<ApiType>;
+      /**
+       * Insufficient CGT bridged supply.
+       **/
       InsufficientNativeBridged: AugmentedError<ApiType>;
+      /**
+       * The maximum batch size exceeded.
+       **/
       MaxBatchSizeExceeded: AugmentedError<ApiType>;
+      /**
+       * The account request is already being processed.
+       **/
       RequestAlreadyProcessed: AugmentedError<ApiType>;
+      /**
+       * The sender is not a bridge manager.
+       **/
       SenderNotBridgeManager: AugmentedError<ApiType>;
+      /**
+       * The Substrate account is blacklisted.
+       **/
       SubAccountBlacklisted: AugmentedError<ApiType>;
       /**
        * Generic error
@@ -559,6 +631,28 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    incentives: {
+      /**
+       * Invalid currency id
+       **/
+      InvalidCurrencyId: AugmentedError<ApiType>;
+      /**
+       * Invalid pool id
+       **/
+      InvalidPoolId: AugmentedError<ApiType>;
+      /**
+       * Invalid rate
+       **/
+      InvalidRate: AugmentedError<ApiType>;
+      /**
+       * Share amount is not enough
+       **/
+      NotEnough: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     indices: {
       /**
        * The index was not available.
@@ -807,7 +901,7 @@ declare module '@polkadot/api-base/types/errors' {
     };
     parachainSystem: {
       /**
-       * The inherent which supplies the host configuration did not run this block
+       * The inherent which supplies the host configuration did not run this block.
        **/
       HostConfigurationNotAvailable: AugmentedError<ApiType>;
       /**
@@ -819,16 +913,16 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NotScheduled: AugmentedError<ApiType>;
       /**
-       * Attempt to upgrade validation function while existing upgrade pending
+       * Attempt to upgrade validation function while existing upgrade pending.
        **/
       OverlappingUpgrades: AugmentedError<ApiType>;
       /**
-       * Polkadot currently prohibits this parachain from upgrading its validation function
+       * Polkadot currently prohibits this parachain from upgrading its validation function.
        **/
       ProhibitedByPolkadot: AugmentedError<ApiType>;
       /**
        * The supplied validation function has compiled into a blob larger than Polkadot is
-       * willing to run
+       * willing to run.
        **/
       TooBig: AugmentedError<ApiType>;
       /**
@@ -836,9 +930,23 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       Unauthorized: AugmentedError<ApiType>;
       /**
-       * The inherent which supplies the validation data did not run this block
+       * The inherent which supplies the validation data did not run this block.
        **/
       ValidationDataNotAvailable: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    pausing: {
+      /**
+       * can not pause
+       **/
+      CannotPause: AugmentedError<ApiType>;
+      /**
+       * invalid character encoding
+       **/
+      InvalidCharacter: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -996,6 +1104,18 @@ declare module '@polkadot/api-base/types/errors' {
        * A call which is incompatible with the proxy type's filter was attempted.
        **/
       Unproxyable: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    rewards: {
+      CanSplitOnlyLessThanShare: AugmentedError<ApiType>;
+      /**
+       * Pool does not exist
+       **/
+      PoolDoesNotExist: AugmentedError<ApiType>;
+      ShareDoesNotExist: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
