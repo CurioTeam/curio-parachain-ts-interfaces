@@ -43,7 +43,9 @@ export interface TokenSymbol extends Enum {
   readonly isNear: boolean;
   readonly isWct1: boolean;
   readonly isTon: boolean;
-  readonly type: 'Cgt' | 'Dot' | 'Ksm' | 'Unq' | 'Qtz' | 'Glmr' | 'Movr' | 'Eth' | 'Dai' | 'Usdt' | 'Usdc' | 'Btc' | 'Avax' | 'Sol' | 'Aurora' | 'Near' | 'Wct1' | 'Ton';
+  readonly isXor: boolean;
+  readonly isVal: boolean;
+  readonly type: 'Cgt' | 'Dot' | 'Ksm' | 'Unq' | 'Qtz' | 'Glmr' | 'Movr' | 'Eth' | 'Dai' | 'Usdt' | 'Usdc' | 'Btc' | 'Avax' | 'Sol' | 'Aurora' | 'Near' | 'Wct1' | 'Ton' | 'Xor' | 'Val';
 }
 
 /** @name TradingPair */

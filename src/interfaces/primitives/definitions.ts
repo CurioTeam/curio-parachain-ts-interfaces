@@ -21,6 +21,8 @@ export default {
           NEAR: 38,
           WCT1: 39,
           TON: 40,
+          XOR: 41,
+          VAL: 42,
         }
       },
       DexShare: {
