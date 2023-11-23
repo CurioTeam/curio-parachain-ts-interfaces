@@ -32,7 +32,8 @@
     "paths": {
       "curio-parachain-ts-interfaces/*": ["src/*"],
       "@polkadot/api/augment": ["src/interfaces/augment-api.ts"],
-      "@polkadot/types/augment": ["src/interfaces/augment-types.ts"]
+      "@polkadot/types/augment": ["src/interfaces/augment-types.ts"],
+      "@polkadot/types/lookup": ["src/interfaces/types-lookup.ts"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
