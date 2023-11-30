@@ -4,7 +4,7 @@ export default {
             minContribution: '(Balance, Balance)',
             targetProvision: '(Balance, Balance)',
             accumulatedProvision: '(Balance, Balance)',
-            notBefore: 'BlockNumber'
+            notBefore: 'u64'
         },
         TradingPairStatus: {
             _enum: {
