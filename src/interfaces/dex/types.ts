@@ -1,16 +1,16 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Enum, Struct } from '@polkadot/types-codec';
+import type { Enum, Struct, u64 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
-import type { Balance, BlockNumber } from '@polkadot/types/interfaces/runtime';
+import type { Balance } from '@polkadot/types/interfaces/runtime';
 
 /** @name ProvisionParameters */
 export interface ProvisionParameters extends Struct {
   readonly minContribution: ITuple<[Balance, Balance]>;
   readonly targetProvision: ITuple<[Balance, Balance]>;
   readonly accumulatedProvision: ITuple<[Balance, Balance]>;
-  readonly notBefore: BlockNumber;
+  readonly notBefore: u64;
 }
 
 /** @name TradingPairStatus */
