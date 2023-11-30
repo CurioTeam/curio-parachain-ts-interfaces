@@ -12,9 +12,10 @@ fi
 
 git switch main
 git checkout src build/
+git checkout src package.json
+git restore --staged .
 cp -rf build/* ./
 rm -rf build/
-git checkout src package.json
 
 if [[ -z "$(git status -s)" ]]; then
     echo "no changes to publish"
