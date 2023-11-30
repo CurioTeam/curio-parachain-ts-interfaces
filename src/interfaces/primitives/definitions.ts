@@ -1,6 +1,8 @@
 export default {
     types: {
       Amount: 'i128',
+      Balance: 'u128',
+      BlockNumber: 'u64',
       TokenSymbol: {
         _enum: {
           CGT: 0,

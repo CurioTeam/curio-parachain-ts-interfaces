@@ -1,11 +1,17 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Enum, i128 } from '@polkadot/types-codec';
+import type { Enum, i128, u128, u64 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 
 /** @name Amount */
 export interface Amount extends i128 {}
+
+/** @name Balance */
+export interface Balance extends u128 {}
+
+/** @name BlockNumber */
+export interface BlockNumber extends u64 {}
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {
