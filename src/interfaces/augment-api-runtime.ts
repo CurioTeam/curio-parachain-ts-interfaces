@@ -156,7 +156,7 @@ declare module '@polkadot/api-base/types/calls' {
       /**
        * Provides a sorted list of collators most suited for given delegator's stake amount determined with some heuristic algorithm.
        **/
-      getSortedProposedCandidates: AugmentedCall<ApiType, (balance: Balance | AnyNumber | Uint8Array, header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array) => Observable<Vec<AccountId>>>;
+      getSortedProposedCandidates: AugmentedCall<ApiType, (balance: Balance | AnyNumber | Uint8Array) => Observable<Vec<AccountId>>>;
       /**
        * Calculate the current staking and reward rates for collators and delegators
        **/
