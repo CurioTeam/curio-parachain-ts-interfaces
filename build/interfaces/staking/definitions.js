@@ -32,6 +32,10 @@ export default {
                             {
                                 name: 'balance',
                                 type: 'Balance'
+                            },
+                            {
+                                name: 'header',
+                                type: 'Header'
                             }
                         ],
                         type: 'Vec<AccountId>'
