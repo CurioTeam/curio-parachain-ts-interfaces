@@ -13,6 +13,7 @@ fi
 git switch main
 git checkout src build/
 git checkout src package.json
+git checkout src types.json
 git restore --staged .
 cp -rf build/* ./
 rm -rf build/
@@ -22,7 +23,7 @@ if [[ -z "$(git status -s)" ]]; then
     exit 1
 fi
 
-git add interfaces/ index* package.json
+git add interfaces/ index* package.json types.json
 git commit -m "$2"
 
 GREEN='\033[0;32m'
