@@ -1,0 +1,64 @@
+{
+    "ProvisionParameters": {
+        "minContribution": "(Balance, Balance)",
+        "targetProvision": "(Balance, Balance)",
+        "accumulatedProvision": "(Balance, Balance)",
+        "notBefore": "u64"
+    },
+    "TradingPairStatus": {
+        "_enum": {
+        "Disabled": "Null",
+        "Provisioning": "ProvisionParameters",
+        "Enabled": "Null"
+        }
+    },
+    "Amount": "i128",
+    "Balance": "u128",
+    "BlockNumber": "u64",
+    "TokenSymbol": {
+        "_enum": {
+        "CGT": 0,
+        "DOT": 1,
+        "KSM": 2,
+        "UNQ": 3,
+        "QTZ": 4,
+        "GLMR": 5,
+        "MOVR": 6,
+        "ETH": 30,
+        "DAI": 31,
+        "USDT": 32,
+        "USDC": 33,
+        "BTC": 34,
+        "AVAX": 35,
+        "SOL": 36,
+        "AURORA": 37,
+        "NEAR": 38,
+        "WCT1": 39,
+        "TON": 40,
+        "XOR": 41,
+        "VAL": 42
+        }
+    },
+    "DexShare": {
+        "_enum": {
+        "Token": "TokenSymbol"
+        }
+    },
+    "CurrencyId": {
+        "_enum": {
+        "Token": "TokenSymbol",
+        "DEXShare": "(DexShare, DexShare)"
+        }
+    },
+    "TradingPair": "(CurrencyId,  CurrencyId)",
+    "StakingRates": {
+        "collatorStakingRate": "Perquintill",
+        "collatorRewardRate": "Perquintill",
+        "delegatorStakingRate": "Perquintill",
+        "delegatorRewardRate": "Perquintill"
+    },
+    "types": {
+        "ExchangeRate": "FixedU128",
+        "Ratio": "FixedU128"
+    }
+}
