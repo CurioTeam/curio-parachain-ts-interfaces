@@ -11,6 +11,37 @@ export type __AugmentedError<ApiType extends ApiTypes> = AugmentedError<ApiType>
 
 declare module '@polkadot/api-base/types/errors' {
   interface AugmentedErrors<ApiType extends ApiTypes> {
+    assetRegistry: {
+      /**
+       * Asset was not found.
+       **/
+      AssetNotFound: AugmentedError<ApiType>;
+      /**
+       * The version of the `VersionedMultiLocation` value used is not able
+       * to be interpreted.
+       **/
+      BadVersion: AugmentedError<ApiType>;
+      /**
+       * Another asset was already register with this asset id.
+       **/
+      ConflictingAssetId: AugmentedError<ApiType>;
+      /**
+       * Another asset was already register with this location.
+       **/
+      ConflictingLocation: AugmentedError<ApiType>;
+      /**
+       * The asset id is invalid.
+       **/
+      InvalidAssetId: AugmentedError<ApiType>;
+      /**
+       * Name or symbol is too long.
+       **/
+      InvalidAssetString: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     balances: {
       /**
        * Beneficiary account must pre-exist.
@@ -198,47 +229,56 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    council: {
+    convictionVoting: {
       /**
-       * Members are already initialized!
+       * The account is already delegating.
        **/
-      AlreadyInitialized: AugmentedError<ApiType>;
+      AlreadyDelegating: AugmentedError<ApiType>;
       /**
-       * Duplicate proposals not allowed
+       * The account currently has votes attached to it and the operation cannot succeed until
+       * these are removed, either through `unvote` or `reap_vote`.
        **/
-      DuplicateProposal: AugmentedError<ApiType>;
+      AlreadyVoting: AugmentedError<ApiType>;
       /**
-       * Duplicate vote ignored
+       * The class ID supplied is invalid.
        **/
-      DuplicateVote: AugmentedError<ApiType>;
+      BadClass: AugmentedError<ApiType>;
       /**
-       * Account is not a member
+       * The class must be supplied since it is not easily determinable from the state.
        **/
-      NotMember: AugmentedError<ApiType>;
+      ClassNeeded: AugmentedError<ApiType>;
       /**
-       * Proposal must exist
+       * Too high a balance was provided that the account cannot afford.
        **/
-      ProposalMissing: AugmentedError<ApiType>;
+      InsufficientFunds: AugmentedError<ApiType>;
       /**
-       * The close call was made too early, before the end of the voting.
+       * Maximum number of votes reached.
        **/
-      TooEarly: AugmentedError<ApiType>;
+      MaxVotesReached: AugmentedError<ApiType>;
       /**
-       * There can only be a maximum of `MaxProposals` active proposals.
+       * Delegation to oneself makes no sense.
        **/
-      TooManyProposals: AugmentedError<ApiType>;
+      Nonsense: AugmentedError<ApiType>;
       /**
-       * Mismatched index
+       * The actor has no permission to conduct the action.
        **/
-      WrongIndex: AugmentedError<ApiType>;
+      NoPermission: AugmentedError<ApiType>;
       /**
-       * The given length bound for the proposal was too low.
+       * The actor has no permission to conduct the action right now but will do in the future.
        **/
-      WrongProposalLength: AugmentedError<ApiType>;
+      NoPermissionYet: AugmentedError<ApiType>;
       /**
-       * The given weight bound for the proposal was too low.
+       * The account is not currently delegating.
        **/
-      WrongProposalWeight: AugmentedError<ApiType>;
+      NotDelegating: AugmentedError<ApiType>;
+      /**
+       * Poll is not ongoing.
+       **/
+      NotOngoing: AugmentedError<ApiType>;
+      /**
+       * The given account did not vote on the poll.
+       **/
+      NotVoter: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -263,109 +303,6 @@ declare module '@polkadot/api-base/types/errors' {
        * Deposit result is not expected
        **/
       DepositFailed: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    democracy: {
-      /**
-       * Cannot cancel the same proposal twice
-       **/
-      AlreadyCanceled: AugmentedError<ApiType>;
-      /**
-       * The account is already delegating.
-       **/
-      AlreadyDelegating: AugmentedError<ApiType>;
-      /**
-       * Identity may not veto a proposal twice
-       **/
-      AlreadyVetoed: AugmentedError<ApiType>;
-      /**
-       * Proposal already made
-       **/
-      DuplicateProposal: AugmentedError<ApiType>;
-      /**
-       * The instant referendum origin is currently disallowed.
-       **/
-      InstantNotAllowed: AugmentedError<ApiType>;
-      /**
-       * Too high a balance was provided that the account cannot afford.
-       **/
-      InsufficientFunds: AugmentedError<ApiType>;
-      /**
-       * Invalid hash
-       **/
-      InvalidHash: AugmentedError<ApiType>;
-      /**
-       * Maximum number of votes reached.
-       **/
-      MaxVotesReached: AugmentedError<ApiType>;
-      /**
-       * No proposals waiting
-       **/
-      NoneWaiting: AugmentedError<ApiType>;
-      /**
-       * Delegation to oneself makes no sense.
-       **/
-      Nonsense: AugmentedError<ApiType>;
-      /**
-       * The actor has no permission to conduct the action.
-       **/
-      NoPermission: AugmentedError<ApiType>;
-      /**
-       * No external proposal
-       **/
-      NoProposal: AugmentedError<ApiType>;
-      /**
-       * The account is not currently delegating.
-       **/
-      NotDelegating: AugmentedError<ApiType>;
-      /**
-       * Next external proposal not simple majority
-       **/
-      NotSimpleMajority: AugmentedError<ApiType>;
-      /**
-       * The given account did not vote on the referendum.
-       **/
-      NotVoter: AugmentedError<ApiType>;
-      /**
-       * The preimage does not exist.
-       **/
-      PreimageNotExist: AugmentedError<ApiType>;
-      /**
-       * Proposal still blacklisted
-       **/
-      ProposalBlacklisted: AugmentedError<ApiType>;
-      /**
-       * Proposal does not exist
-       **/
-      ProposalMissing: AugmentedError<ApiType>;
-      /**
-       * Vote given for invalid referendum
-       **/
-      ReferendumInvalid: AugmentedError<ApiType>;
-      /**
-       * Maximum number of items reached.
-       **/
-      TooMany: AugmentedError<ApiType>;
-      /**
-       * Value too low
-       **/
-      ValueLow: AugmentedError<ApiType>;
-      /**
-       * The account currently has votes attached to it and the operation cannot succeed until
-       * these are removed, either through `unvote` or `reap_vote`.
-       **/
-      VotesExist: AugmentedError<ApiType>;
-      /**
-       * Voting period too low
-       **/
-      VotingPeriodLow: AugmentedError<ApiType>;
-      /**
-       * Invalid upper bound.
-       **/
-      WrongUpperBound: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -479,75 +416,101 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    elections: {
+    fellowshipCollective: {
       /**
-       * Duplicated candidate submission.
+       * Account is already a member.
        **/
-      DuplicatedCandidate: AugmentedError<ApiType>;
+      AlreadyMember: AugmentedError<ApiType>;
       /**
-       * Candidate does not have enough funds.
+       * Unexpected error in state.
        **/
-      InsufficientCandidateFunds: AugmentedError<ApiType>;
+      Corruption: AugmentedError<ApiType>;
       /**
-       * The renouncing origin presented a wrong `Renouncing` parameter.
+       * The information provided is incorrect.
        **/
-      InvalidRenouncing: AugmentedError<ApiType>;
+      InvalidWitness: AugmentedError<ApiType>;
       /**
-       * Prediction regarding replacement after member removal is wrong.
+       * There are no further records to be removed.
        **/
-      InvalidReplacement: AugmentedError<ApiType>;
+      NoneRemaining: AugmentedError<ApiType>;
       /**
-       * The provided count of number of votes is incorrect.
+       * The origin is not sufficiently privileged to do the operation.
        **/
-      InvalidVoteCount: AugmentedError<ApiType>;
+      NoPermission: AugmentedError<ApiType>;
       /**
-       * The provided count of number of candidates is incorrect.
-       **/
-      InvalidWitnessData: AugmentedError<ApiType>;
-      /**
-       * Cannot vote with stake less than minimum balance.
-       **/
-      LowBalance: AugmentedError<ApiType>;
-      /**
-       * Cannot vote more than maximum allowed.
-       **/
-      MaximumVotesExceeded: AugmentedError<ApiType>;
-      /**
-       * Member cannot re-submit candidacy.
-       **/
-      MemberSubmit: AugmentedError<ApiType>;
-      /**
-       * Must be a voter.
-       **/
-      MustBeVoter: AugmentedError<ApiType>;
-      /**
-       * Not a member.
+       * Account is not a member.
        **/
       NotMember: AugmentedError<ApiType>;
       /**
-       * Must vote for at least one candidate.
+       * The given poll index is unknown or has closed.
        **/
-      NoVotes: AugmentedError<ApiType>;
+      NotPolling: AugmentedError<ApiType>;
       /**
-       * Runner cannot re-submit candidacy.
+       * The given poll is still ongoing.
        **/
-      RunnerUpSubmit: AugmentedError<ApiType>;
+      Ongoing: AugmentedError<ApiType>;
       /**
-       * Too many candidates have been created.
+       * The member's rank is too low to vote.
        **/
-      TooManyCandidates: AugmentedError<ApiType>;
+      RankTooLow: AugmentedError<ApiType>;
       /**
-       * Cannot vote more than candidates.
+       * Generic error
        **/
-      TooManyVotes: AugmentedError<ApiType>;
+      [key: string]: AugmentedError<ApiType>;
+    };
+    fellowshipReferenda: {
       /**
-       * Voter can not pay voting bond.
+       * The referendum index provided is invalid in this context.
        **/
-      UnableToPayBond: AugmentedError<ApiType>;
+      BadReferendum: AugmentedError<ApiType>;
       /**
-       * Cannot vote when no candidates or members exist.
+       * The referendum status is invalid for this operation.
        **/
-      UnableToVote: AugmentedError<ApiType>;
+      BadStatus: AugmentedError<ApiType>;
+      /**
+       * The track identifier given was invalid.
+       **/
+      BadTrack: AugmentedError<ApiType>;
+      /**
+       * There are already a full complement of referenda in progress for this track.
+       **/
+      Full: AugmentedError<ApiType>;
+      /**
+       * Referendum's decision deposit is already paid.
+       **/
+      HasDeposit: AugmentedError<ApiType>;
+      /**
+       * The deposit cannot be refunded since none was made.
+       **/
+      NoDeposit: AugmentedError<ApiType>;
+      /**
+       * The deposit refunder is not the depositor.
+       **/
+      NoPermission: AugmentedError<ApiType>;
+      /**
+       * There was nothing to do in the advancement.
+       **/
+      NothingToDo: AugmentedError<ApiType>;
+      /**
+       * Referendum is not ongoing.
+       **/
+      NotOngoing: AugmentedError<ApiType>;
+      /**
+       * No track exists for the proposal origin.
+       **/
+      NoTrack: AugmentedError<ApiType>;
+      /**
+       * The preimage does not exist.
+       **/
+      PreimageNotExist: AugmentedError<ApiType>;
+      /**
+       * The queue of the track is empty.
+       **/
+      QueueEmpty: AugmentedError<ApiType>;
+      /**
+       * Any deposit cannot be refunded until after the decision is over.
+       **/
+      Unfinished: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -938,20 +901,6 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    pausing: {
-      /**
-       * can not pause
-       **/
-      CannotPause: AugmentedError<ApiType>;
-      /**
-       * invalid character encoding
-       **/
-      InvalidCharacter: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
     polkadotXcm: {
       /**
        * The given account is not an identifiable sovereign account for any location.
@@ -991,7 +940,7 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       Filtered: AugmentedError<ApiType>;
       /**
-       * The unlock operation cannot succeed because there are still users of the lock.
+       * The unlock operation cannot succeed because there are still consumers of the lock.
        **/
       InUse: AugmentedError<ApiType>;
       /**
@@ -1015,8 +964,8 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NoSubscription: AugmentedError<ApiType>;
       /**
-       * There was some other issue (i.e. not to do with routing) in sending the message. Perhaps
-       * a lack of space for buffering the message.
+       * There was some other issue (i.e. not to do with routing) in sending the message.
+       * Perhaps a lack of space for buffering the message.
        **/
       SendFailure: AugmentedError<ApiType>;
       /**
@@ -1104,6 +1053,64 @@ declare module '@polkadot/api-base/types/errors' {
        * A call which is incompatible with the proxy type's filter was attempted.
        **/
       Unproxyable: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    referenda: {
+      /**
+       * The referendum index provided is invalid in this context.
+       **/
+      BadReferendum: AugmentedError<ApiType>;
+      /**
+       * The referendum status is invalid for this operation.
+       **/
+      BadStatus: AugmentedError<ApiType>;
+      /**
+       * The track identifier given was invalid.
+       **/
+      BadTrack: AugmentedError<ApiType>;
+      /**
+       * There are already a full complement of referenda in progress for this track.
+       **/
+      Full: AugmentedError<ApiType>;
+      /**
+       * Referendum's decision deposit is already paid.
+       **/
+      HasDeposit: AugmentedError<ApiType>;
+      /**
+       * The deposit cannot be refunded since none was made.
+       **/
+      NoDeposit: AugmentedError<ApiType>;
+      /**
+       * The deposit refunder is not the depositor.
+       **/
+      NoPermission: AugmentedError<ApiType>;
+      /**
+       * There was nothing to do in the advancement.
+       **/
+      NothingToDo: AugmentedError<ApiType>;
+      /**
+       * Referendum is not ongoing.
+       **/
+      NotOngoing: AugmentedError<ApiType>;
+      /**
+       * No track exists for the proposal origin.
+       **/
+      NoTrack: AugmentedError<ApiType>;
+      /**
+       * The preimage does not exist.
+       **/
+      PreimageNotExist: AugmentedError<ApiType>;
+      /**
+       * The queue of the track is empty.
+       **/
+      QueueEmpty: AugmentedError<ApiType>;
+      /**
+       * Any deposit cannot be refunded until after the decision is over.
+       **/
+      Unfinished: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -1217,100 +1224,6 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    technicalCommittee: {
-      /**
-       * Members are already initialized!
-       **/
-      AlreadyInitialized: AugmentedError<ApiType>;
-      /**
-       * Duplicate proposals not allowed
-       **/
-      DuplicateProposal: AugmentedError<ApiType>;
-      /**
-       * Duplicate vote ignored
-       **/
-      DuplicateVote: AugmentedError<ApiType>;
-      /**
-       * Account is not a member
-       **/
-      NotMember: AugmentedError<ApiType>;
-      /**
-       * Proposal must exist
-       **/
-      ProposalMissing: AugmentedError<ApiType>;
-      /**
-       * The close call was made too early, before the end of the voting.
-       **/
-      TooEarly: AugmentedError<ApiType>;
-      /**
-       * There can only be a maximum of `MaxProposals` active proposals.
-       **/
-      TooManyProposals: AugmentedError<ApiType>;
-      /**
-       * Mismatched index
-       **/
-      WrongIndex: AugmentedError<ApiType>;
-      /**
-       * The given length bound for the proposal was too low.
-       **/
-      WrongProposalLength: AugmentedError<ApiType>;
-      /**
-       * The given weight bound for the proposal was too low.
-       **/
-      WrongProposalWeight: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    technicalMembership: {
-      /**
-       * Already a member.
-       **/
-      AlreadyMember: AugmentedError<ApiType>;
-      /**
-       * Not a member.
-       **/
-      NotMember: AugmentedError<ApiType>;
-      /**
-       * Too many members.
-       **/
-      TooManyMembers: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    tips: {
-      /**
-       * The tip was already found/started.
-       **/
-      AlreadyKnown: AugmentedError<ApiType>;
-      /**
-       * The account attempting to retract the tip is not the finder of the tip.
-       **/
-      NotFinder: AugmentedError<ApiType>;
-      /**
-       * The tip cannot be claimed/closed because it's still in the countdown period.
-       **/
-      Premature: AugmentedError<ApiType>;
-      /**
-       * The reason given is just too big.
-       **/
-      ReasonTooBig: AugmentedError<ApiType>;
-      /**
-       * The tip cannot be claimed/closed because there are not enough tippers yet.
-       **/
-      StillOpen: AugmentedError<ApiType>;
-      /**
-       * The tip hash is unknown.
-       **/
-      UnknownTip: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
     tokens: {
       /**
        * Cannot convert Amount into Balance type
@@ -1373,6 +1286,43 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    txPause: {
+      /**
+       * The call is paused.
+       **/
+      IsPaused: AugmentedError<ApiType>;
+      /**
+       * The call is unpaused.
+       **/
+      IsUnpaused: AugmentedError<ApiType>;
+      NotFound: AugmentedError<ApiType>;
+      /**
+       * The call is whitelisted and cannot be paused.
+       **/
+      Unpausable: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    unknownTokens: {
+      /**
+       * The operation will cause balance to overflow.
+       **/
+      BalanceOverflow: AugmentedError<ApiType>;
+      /**
+       * The balance is too low.
+       **/
+      BalanceTooLow: AugmentedError<ApiType>;
+      /**
+       * Unhandled asset.
+       **/
+      UnhandledAsset: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     utility: {
       /**
        * Too many calls batched.
@@ -1410,6 +1360,32 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    whitelistFrame: {
+      /**
+       * The call was already whitelisted; No-Op.
+       **/
+      CallAlreadyWhitelisted: AugmentedError<ApiType>;
+      /**
+       * The call was not whitelisted.
+       **/
+      CallIsNotWhitelisted: AugmentedError<ApiType>;
+      /**
+       * The weight of the decoded call was higher than the witness.
+       **/
+      InvalidCallWeightWitness: AugmentedError<ApiType>;
+      /**
+       * The preimage of the call hash could not be loaded.
+       **/
+      UnavailablePreImage: AugmentedError<ApiType>;
+      /**
+       * The call could not be decoded.
+       **/
+      UndecodableCall: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     xcmpQueue: {
       /**
        * Bad overweight index.
@@ -1431,6 +1407,91 @@ declare module '@polkadot/api-base/types/errors' {
        * Provided weight is possibly not enough to execute the message.
        **/
       WeightOverLimit: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    xTokens: {
+      /**
+       * Asset has no reserve location.
+       **/
+      AssetHasNoReserve: AugmentedError<ApiType>;
+      /**
+       * The specified index does not exist in a MultiAssets struct.
+       **/
+      AssetIndexNonExistent: AugmentedError<ApiType>;
+      /**
+       * The version of the `Versioned` value used is not able to be
+       * interpreted.
+       **/
+      BadVersion: AugmentedError<ApiType>;
+      /**
+       * Could not re-anchor the assets to declare the fees for the
+       * destination chain.
+       **/
+      CannotReanchor: AugmentedError<ApiType>;
+      /**
+       * The destination `MultiLocation` provided cannot be inverted.
+       **/
+      DestinationNotInvertible: AugmentedError<ApiType>;
+      /**
+       * We tried sending distinct asset and fee but they have different
+       * reserve chains.
+       **/
+      DistinctReserveForAssetAndFee: AugmentedError<ApiType>;
+      /**
+       * Fee is not enough.
+       **/
+      FeeNotEnough: AugmentedError<ApiType>;
+      /**
+       * Could not get ancestry of asset reserve location.
+       **/
+      InvalidAncestry: AugmentedError<ApiType>;
+      /**
+       * The MultiAsset is invalid.
+       **/
+      InvalidAsset: AugmentedError<ApiType>;
+      /**
+       * Invalid transfer destination.
+       **/
+      InvalidDest: AugmentedError<ApiType>;
+      /**
+       * MinXcmFee not registered for certain reserve location
+       **/
+      MinXcmFeeNotDefined: AugmentedError<ApiType>;
+      /**
+       * Not cross-chain transfer.
+       **/
+      NotCrossChainTransfer: AugmentedError<ApiType>;
+      /**
+       * Currency is not cross-chain transferable.
+       **/
+      NotCrossChainTransferableCurrency: AugmentedError<ApiType>;
+      /**
+       * Not supported MultiLocation
+       **/
+      NotSupportedMultiLocation: AugmentedError<ApiType>;
+      /**
+       * The number of assets to be sent is over the maximum.
+       **/
+      TooManyAssetsBeingSent: AugmentedError<ApiType>;
+      /**
+       * The message's weight could not be determined.
+       **/
+      UnweighableMessage: AugmentedError<ApiType>;
+      /**
+       * XCM execution failed.
+       **/
+      XcmExecutionFailed: AugmentedError<ApiType>;
+      /**
+       * The transfering asset amount is zero.
+       **/
+      ZeroAmount: AugmentedError<ApiType>;
+      /**
+       * The fee is zero.
+       **/
+      ZeroFee: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

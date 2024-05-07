@@ -6,15 +6,25 @@
 import '@polkadot/api-base/types/consts';
 
 import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
-import type { Option, U8aFixed, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
+import type { Option, Vec, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec, ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, Percent, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CurioMainnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
+import type { AccountId32, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
+import type { CurioMainnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, PalletReferendaTrackInfo, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
 
 declare module '@polkadot/api-base/types/consts' {
   interface AugmentedConsts<ApiType extends ApiTypes> {
+    assetRegistry: {
+      /**
+       * The maximum length of a name or symbol.
+       **/
+      stringLimit: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     balances: {
       /**
        * The minimum amount required to keep an account open. MUST BE GREATER THAN ZERO!
@@ -106,11 +116,21 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
-    council: {
+    convictionVoting: {
       /**
-       * The maximum weight of a dispatch call that can be proposed and executed.
+       * The maximum number of concurrent votes an account may have.
+       * 
+       * Also used to compute weight, an overly large value can lead to extrinsics with large
+       * weight estimation: see `delegate` for instance.
        **/
-      maxProposalWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
+      maxVotes: u32 & AugmentedConst<ApiType>;
+      /**
+       * The minimum period of vote locking.
+       * 
+       * It should be no shorter than enactment period to ensure that in the case of an approval,
+       * those successful voters are locked into the consequences that their votes entail.
+       **/
+      voteLockingPeriod: u64 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -121,72 +141,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The native currency id
        **/
       getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
-      /**
-       * Generic const
-       **/
-      [key: string]: Codec;
-    };
-    democracy: {
-      /**
-       * Period in blocks where an external proposal may not be re-submitted after being vetoed.
-       **/
-      cooloffPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * The period between a proposal being approved and enacted.
-       * 
-       * It should generally be a little more than the unstake period to ensure that
-       * voting stakers have an opportunity to remove themselves from the system in the case
-       * where they are on the losing side of a vote.
-       **/
-      enactmentPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * Minimum voting period allowed for a fast-track referendum.
-       **/
-      fastTrackVotingPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * Indicator for whether an emergency origin is even allowed to happen. Some chains may
-       * want to set this permanently to `false`, others may want to condition it on things such
-       * as an upgrade having happened recently.
-       **/
-      instantAllowed: bool & AugmentedConst<ApiType>;
-      /**
-       * How often (in blocks) new public referenda are launched.
-       **/
-      launchPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * The maximum number of items which can be blacklisted.
-       **/
-      maxBlacklisted: u32 & AugmentedConst<ApiType>;
-      /**
-       * The maximum number of deposits a public proposal may have at any time.
-       **/
-      maxDeposits: u32 & AugmentedConst<ApiType>;
-      /**
-       * The maximum number of public proposals that can exist at any time.
-       **/
-      maxProposals: u32 & AugmentedConst<ApiType>;
-      /**
-       * The maximum number of votes for an account.
-       * 
-       * Also used to compute weight, an overly big value can
-       * lead to extrinsic with very big weight: see `delegate` for instance.
-       **/
-      maxVotes: u32 & AugmentedConst<ApiType>;
-      /**
-       * The minimum amount to be used as a deposit for a public referendum proposal.
-       **/
-      minimumDeposit: u128 & AugmentedConst<ApiType>;
-      /**
-       * The minimum period of vote locking.
-       * 
-       * It should be no shorter than enactment period to ensure that in the case of an approval,
-       * those successful voters are locked into the consequences that their votes entail.
-       **/
-      voteLockingPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * How often (in blocks) to check for new votes.
-       **/
-      votingPeriod: u64 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -218,65 +172,30 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
-    elections: {
+    fellowshipReferenda: {
       /**
-       * How much should be locked up in order to submit one's candidacy.
+       * Quantization level for the referendum wakeup scheduler. A higher number will result in
+       * fewer storage reads/writes needed for smaller voters, but also result in delays to the
+       * automatic referendum status changes. Explicit servicing instructions are unaffected.
        **/
-      candidacyBond: u128 & AugmentedConst<ApiType>;
+      alarmInterval: u64 & AugmentedConst<ApiType>;
       /**
-       * Number of members to elect.
+       * Maximum size of the referendum queue for a single track.
        **/
-      desiredMembers: u32 & AugmentedConst<ApiType>;
+      maxQueued: u32 & AugmentedConst<ApiType>;
       /**
-       * Number of runners_up to keep.
+       * The minimum amount to be used as a deposit for a public referendum proposal.
        **/
-      desiredRunnersUp: u32 & AugmentedConst<ApiType>;
+      submissionDeposit: u128 & AugmentedConst<ApiType>;
       /**
-       * The maximum number of candidates in a phragmen election.
-       * 
-       * Warning: This impacts the size of the election which is run onchain. Chose wisely, and
-       * consider how it will impact `T::WeightInfo::election_phragmen`.
-       * 
-       * When this limit is reached no more candidates are accepted in the election.
+       * Information concerning the different referendum tracks.
        **/
-      maxCandidates: u32 & AugmentedConst<ApiType>;
+      tracks: Vec<ITuple<[u16, PalletReferendaTrackInfo]>> & AugmentedConst<ApiType>;
       /**
-       * The maximum number of voters to allow in a phragmen election.
-       * 
-       * Warning: This impacts the size of the election which is run onchain. Chose wisely, and
-       * consider how it will impact `T::WeightInfo::election_phragmen`.
-       * 
-       * When the limit is reached the new voters are ignored.
+       * The number of blocks after submission that a referendum must begin being decided by.
+       * Once this passes, then anyone may cancel the referendum.
        **/
-      maxVoters: u32 & AugmentedConst<ApiType>;
-      /**
-       * Maximum numbers of votes per voter.
-       * 
-       * Warning: This impacts the size of the election which is run onchain. Chose wisely, and
-       * consider how it will impact `T::WeightInfo::election_phragmen`.
-       **/
-      maxVotesPerVoter: u32 & AugmentedConst<ApiType>;
-      /**
-       * Identifier for the elections-phragmen pallet's lock
-       **/
-      palletId: U8aFixed & AugmentedConst<ApiType>;
-      /**
-       * How long each seat is kept. This defines the next block number at which an election
-       * round will happen. If set to zero, no elections are ever triggered and the module will
-       * be in passive mode.
-       **/
-      termDuration: u64 & AugmentedConst<ApiType>;
-      /**
-       * Base deposit associated with voting.
-       * 
-       * This should be sensibly high to economically ensure the pallet cannot be attacked by
-       * creating a gigantic number of votes.
-       **/
-      votingBondBase: u128 & AugmentedConst<ApiType>;
-      /**
-       * The amount of bond that need to be locked for each vote (32 bytes).
-       **/
-      votingBondFactor: u128 & AugmentedConst<ApiType>;
+      undecidingTimeout: u64 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -503,6 +422,35 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    referenda: {
+      /**
+       * Quantization level for the referendum wakeup scheduler. A higher number will result in
+       * fewer storage reads/writes needed for smaller voters, but also result in delays to the
+       * automatic referendum status changes. Explicit servicing instructions are unaffected.
+       **/
+      alarmInterval: u64 & AugmentedConst<ApiType>;
+      /**
+       * Maximum size of the referendum queue for a single track.
+       **/
+      maxQueued: u32 & AugmentedConst<ApiType>;
+      /**
+       * The minimum amount to be used as a deposit for a public referendum proposal.
+       **/
+      submissionDeposit: u128 & AugmentedConst<ApiType>;
+      /**
+       * Information concerning the different referendum tracks.
+       **/
+      tracks: Vec<ITuple<[u16, PalletReferendaTrackInfo]>> & AugmentedConst<ApiType>;
+      /**
+       * The number of blocks after submission that a referendum must begin being decided by.
+       * Once this passes, then anyone may cancel the referendum.
+       **/
+      undecidingTimeout: u64 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     scheduler: {
       /**
        * The maximum weight that may be scheduled per block for any dispatchables.
@@ -555,16 +503,6 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
-    technicalCommittee: {
-      /**
-       * The maximum weight of a dispatch call that can be proposed and executed.
-       **/
-      maxProposalWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
-      /**
-       * Generic const
-       **/
-      [key: string]: Codec;
-    };
     timestamp: {
       /**
        * The minimum period between blocks. Beware that this is different to the *expected*
@@ -573,34 +511,6 @@ declare module '@polkadot/api-base/types/consts' {
        * double this period on default settings.
        **/
       minimumPeriod: u64 & AugmentedConst<ApiType>;
-      /**
-       * Generic const
-       **/
-      [key: string]: Codec;
-    };
-    tips: {
-      /**
-       * The amount held on deposit per byte within the tip report reason or bounty description.
-       **/
-      dataDepositPerByte: u128 & AugmentedConst<ApiType>;
-      /**
-       * Maximum acceptable reason length.
-       * 
-       * Benchmarks depend on this value, be sure to update weights file when changing this value
-       **/
-      maximumReasonLength: u32 & AugmentedConst<ApiType>;
-      /**
-       * The period for which a tip remains open after is has achieved threshold tippers.
-       **/
-      tipCountdown: u64 & AugmentedConst<ApiType>;
-      /**
-       * The percent of the final tip which goes to the original reporter of the tip.
-       **/
-      tipFindersFee: Percent & AugmentedConst<ApiType>;
-      /**
-       * The amount held on deposit for placing a tip report.
-       **/
-      tipReportDepositBase: u128 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -684,6 +594,18 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    txPause: {
+      /**
+       * Maximum length for pallet name and call name SCALE encoded string names.
+       * 
+       * TOO LONG NAMES WILL BE TREATED AS PAUSED.
+       **/
+      maxNameLen: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     utility: {
       /**
        * The limit on the number of batched calls.
@@ -700,6 +622,23 @@ declare module '@polkadot/api-base/types/consts' {
        * The minimum amount transferred to call `vested_transfer`.
        **/
       minVestedTransfer: u128 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
+    xTokens: {
+      /**
+       * Base XCM weight.
+       * 
+       * The actually weight for an XCM message is `T::BaseXcmWeight +
+       * T::Weigher::weight(&msg)`.
+       **/
+      baseXcmWeight: SpWeightsWeightV2Weight & AugmentedConst<ApiType>;
+      /**
+       * Self chain location.
+       **/
+      selfLocation: StagingXcmV3MultiLocation & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
