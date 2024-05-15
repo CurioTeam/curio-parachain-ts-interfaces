@@ -29,9 +29,9 @@ declare module '@polkadot/api-base/types/storage' {
             metadata: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<Option<OrmlTraitsAssetRegistryAssetMetadata>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
             /**
              * Generic query
@@ -173,9 +173,9 @@ declare module '@polkadot/api-base/types/storage' {
             currencyMap: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<Option<ITuple<[H160, bool]>>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
             /**
              * Storage of Ethereum account that are blacklisted.
@@ -418,9 +418,9 @@ declare module '@polkadot/api-base/types/storage' {
             } | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<u128>, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]>;
             /**
              * The pending rewards amount, actual available rewards amount may be deducted
@@ -1072,9 +1072,9 @@ declare module '@polkadot/api-base/types/storage' {
             accounts: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<OrmlTokensAccountData>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
             /**
              * Any liquidity locks of a token type under an account.
@@ -1083,9 +1083,9 @@ declare module '@polkadot/api-base/types/storage' {
             locks: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<Vec<OrmlTokensBalanceLock>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
             /**
              * Named reserves on some account balances.
@@ -1093,9 +1093,9 @@ declare module '@polkadot/api-base/types/storage' {
             reserves: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<Vec<OrmlTokensReserveData>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
             /**
              * The total issuance of a token type.
@@ -1103,9 +1103,9 @@ declare module '@polkadot/api-base/types/storage' {
             totalIssuance: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | {
                 Token: any;
             } | {
-                ForeignAsset: any;
-            } | {
                 DexShare: any;
+            } | {
+                ForeignAsset: any;
             } | string | Uint8Array) => Observable<u128>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
             /**
              * Generic query

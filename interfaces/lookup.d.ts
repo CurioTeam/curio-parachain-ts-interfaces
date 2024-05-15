@@ -2396,8 +2396,8 @@ declare const _default: {
     CurioMainnetRuntimeCurrencyId: {
         _enum: {
             Token: string;
-            ForeignAsset: string;
             DexShare: string;
+            ForeignAsset: string;
         };
     };
     /**
