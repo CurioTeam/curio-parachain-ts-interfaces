@@ -2401,8 +2401,8 @@ export default {
   CurioMainnetRuntimeCurrencyId: {
     _enum: {
       Token: 'CurioMainnetRuntimeCurrencyIdTokenSymbol',
-      ForeignAsset: 'u32',
-      DexShare: '(CurioMainnetRuntimeCurrencyIdDexShare,CurioMainnetRuntimeCurrencyIdDexShare)'
+      DexShare: '(CurioMainnetRuntimeCurrencyIdDexShare,CurioMainnetRuntimeCurrencyIdDexShare)',
+      ForeignAsset: 'u32'
     }
   },
   /**

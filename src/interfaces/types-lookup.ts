@@ -2581,11 +2581,11 @@ declare module '@polkadot/types/lookup' {
   interface CurioMainnetRuntimeCurrencyId extends Enum {
     readonly isToken: boolean;
     readonly asToken: CurioMainnetRuntimeCurrencyIdTokenSymbol;
-    readonly isForeignAsset: boolean;
-    readonly asForeignAsset: u32;
     readonly isDexShare: boolean;
     readonly asDexShare: ITuple<[CurioMainnetRuntimeCurrencyIdDexShare, CurioMainnetRuntimeCurrencyIdDexShare]>;
-    readonly type: 'Token' | 'ForeignAsset' | 'DexShare';
+    readonly isForeignAsset: boolean;
+    readonly asForeignAsset: u32;
+    readonly type: 'Token' | 'DexShare' | 'ForeignAsset';
   }
 
   /** @name CurioMainnetRuntimeCurrencyIdTokenSymbol (232) */

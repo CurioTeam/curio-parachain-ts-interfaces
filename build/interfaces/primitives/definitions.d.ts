@@ -20,8 +20,8 @@ declare const _default: {
         CurrencyId: {
             _enum: {
                 Token: string;
+                DexShare: string;
                 ForeignAsset: string;
-                DEXShare: string;
             };
         };
         TradingPair: string;

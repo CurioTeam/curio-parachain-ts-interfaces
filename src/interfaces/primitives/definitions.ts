@@ -20,8 +20,8 @@ export default {
       CurrencyId: {
         _enum: {
           Token: 'TokenSymbol',
-          ForeignAsset: 'u32',
-          DEXShare: '(DexShare, DexShare)'
+          DexShare: '(DexShare, DexShare)',
+          ForeignAsset: 'u32'
         }
       },
       TradingPair: '(CurrencyId,  CurrencyId)'

@@ -31,7 +31,7 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * The metadata of an asset, indexed by asset id.
        **/
-      metadata: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<Option<OrmlTraitsAssetRegistryAssetMetadata>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
+      metadata: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<Option<OrmlTraitsAssetRegistryAssetMetadata>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
       /**
        * Generic query
        **/
@@ -169,7 +169,7 @@ declare module '@polkadot/api-base/types/storage' {
        * 
        * CurrencyMap: map CurrencyIdOf => (EvmAddress, bool).
        **/
-      currencyMap: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<Option<ITuple<[H160, bool]>>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
+      currencyMap: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<Option<ITuple<[H160, bool]>>>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
       /**
        * Storage of Ethereum account that are blacklisted.
        * 
@@ -404,7 +404,7 @@ declare module '@polkadot/api-base/types/storage' {
        * 
        * IncentiveRewardAmounts: double_map Pool, RewardCurrencyId => RewardAmountPerPeriod
        **/
-      incentiveRewardAmounts: AugmentedQuery<ApiType, (arg1: PalletIncentivesPoolId | { Dex: any } | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<u128>, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]>;
+      incentiveRewardAmounts: AugmentedQuery<ApiType, (arg1: PalletIncentivesPoolId | { Dex: any } | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<u128>, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [PalletIncentivesPoolId, CurioMainnetRuntimeCurrencyId]>;
       /**
        * The pending rewards amount, actual available rewards amount may be deducted
        * 
@@ -1032,20 +1032,20 @@ declare module '@polkadot/api-base/types/storage' {
        * NOTE: This is only used in the case that this module is used to store
        * balances.
        **/
-      accounts: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<OrmlTokensAccountData>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
+      accounts: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<OrmlTokensAccountData>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * Any liquidity locks of a token type under an account.
        * NOTE: Should only be accessed when setting, changing and freeing a lock.
        **/
-      locks: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensBalanceLock>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
+      locks: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<Vec<OrmlTokensBalanceLock>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * Named reserves on some account balances.
        **/
-      reserves: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<Vec<OrmlTokensReserveData>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
+      reserves: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<Vec<OrmlTokensReserveData>>, [AccountId32, CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [AccountId32, CurioMainnetRuntimeCurrencyId]>;
       /**
        * The total issuance of a token type.
        **/
-      totalIssuance: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { ForeignAsset: any } | { DexShare: any } | string | Uint8Array) => Observable<u128>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
+      totalIssuance: AugmentedQuery<ApiType, (arg: CurioMainnetRuntimeCurrencyId | { Token: any } | { DexShare: any } | { ForeignAsset: any } | string | Uint8Array) => Observable<u128>, [CurioMainnetRuntimeCurrencyId]> & QueryableStorageEntry<ApiType, [CurioMainnetRuntimeCurrencyId]>;
       /**
        * Generic query
        **/

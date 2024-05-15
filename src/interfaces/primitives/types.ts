@@ -17,11 +17,11 @@ export interface BlockNumber extends u64 {}
 export interface CurrencyId extends Enum {
   readonly isToken: boolean;
   readonly asToken: TokenSymbol;
-  readonly isForeignAsset: boolean;
-  readonly asForeignAsset: u32;
   readonly isDexShare: boolean;
   readonly asDexShare: ITuple<[DexShare, DexShare]>;
-  readonly type: 'Token' | 'ForeignAsset' | 'DexShare';
+  readonly isForeignAsset: boolean;
+  readonly asForeignAsset: u32;
+  readonly type: 'Token' | 'DexShare' | 'ForeignAsset';
 }
 
 /** @name DexShare */
