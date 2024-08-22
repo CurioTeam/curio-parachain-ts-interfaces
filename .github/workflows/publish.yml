@@ -2,7 +2,7 @@ name: Checkout interfaces to develop branch if they have been updated on the src
 on:
   push:
     branches: ['src']
-    paths: ['build']
+    paths: ['build/**']
 defaults:
   run:
     shell: bash
