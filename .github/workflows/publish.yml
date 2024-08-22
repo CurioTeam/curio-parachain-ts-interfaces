@@ -1,0 +1,35 @@
+name: Checkout interfaces to develop branch if they have been updated on the src branch
+on:
+  push:
+    branches: ['src']
+    paths: ['build']
+defaults:
+  run:
+    shell: bash
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Pull the repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get commit message
+        run: |
+          echo "commit_message=$(git log --pretty='format:%h:%s' -1 ${{ github.sha }})" >> "$GITHUB_ENV"
+      - name: Checkout changes to the develop branch
+        run: |
+          git checkout develop
+          git checkout src -- build package.json package-lock.json .github
+          cp -rf build/* .
+          rm -rf build
+      - name: Commit and push changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "$commit_message"
+          git push
