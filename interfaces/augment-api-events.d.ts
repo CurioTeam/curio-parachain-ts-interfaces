@@ -2,18 +2,18 @@ import '@polkadot/api-base/types/events';
 import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, U8aFixed, Vec, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, H160, H256, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeUtilitiesProxyType, FrameSupportDispatchDispatchInfo, FrameSupportDispatchPostDispatchInfo, FrameSupportPreimagesBounded, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletConvictionVotingTally, PalletDexTradingPair, PalletIncentivesPoolId, PalletMultisigTimepoint, PalletRankedCollectiveTally, PalletRankedCollectiveVoteRecord, SpRuntimeDispatchError, SpRuntimeDispatchErrorWithPostInfo, SpWeightsWeightV2Weight, StagingXcmV3MultiAsset, StagingXcmV3MultiLocation, StagingXcmV3MultiassetMultiAssets, StagingXcmV3Response, StagingXcmV3TraitsError, StagingXcmV3TraitsOutcome, StagingXcmV3Xcm, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { AccountId32, H256, Perquintill } from '@polkadot/types/interfaces/runtime';
+import type { CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, CurioKusamaRuntimeCommonCurrencyId, FrameSupportDispatchDispatchInfo, FrameSupportDispatchPostDispatchInfo, FrameSupportPreimagesBounded, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletConvictionVotingTally, PalletDexTradingPair, PalletIncentivesPoolId, PalletMultisigTimepoint, PalletRankedCollectiveTally, PalletRankedCollectiveVoteRecord, SpRuntimeDispatchError, SpRuntimeDispatchErrorWithPostInfo, SpWeightsWeightV2Weight, StagingXcmV3MultiAsset, StagingXcmV3MultiLocation, StagingXcmV3MultiassetMultiAssets, StagingXcmV3Response, StagingXcmV3TraitsError, StagingXcmV3TraitsOutcome, StagingXcmV3Xcm, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 declare module '@polkadot/api-base/types/events' {
     interface AugmentedEvents<ApiType extends ApiTypes> {
         assetRegistry: {
-            RegisteredAsset: AugmentedEvent<ApiType, [assetId: CurioMainnetRuntimeCurrencyId, metadata: OrmlTraitsAssetRegistryAssetMetadata], {
-                assetId: CurioMainnetRuntimeCurrencyId;
+            RegisteredAsset: AugmentedEvent<ApiType, [assetId: CurioKusamaRuntimeCommonCurrencyId, metadata: OrmlTraitsAssetRegistryAssetMetadata], {
+                assetId: CurioKusamaRuntimeCommonCurrencyId;
                 metadata: OrmlTraitsAssetRegistryAssetMetadata;
             }>;
-            UpdatedAsset: AugmentedEvent<ApiType, [assetId: CurioMainnetRuntimeCurrencyId, metadata: OrmlTraitsAssetRegistryAssetMetadata], {
-                assetId: CurioMainnetRuntimeCurrencyId;
+            UpdatedAsset: AugmentedEvent<ApiType, [assetId: CurioKusamaRuntimeCommonCurrencyId, metadata: OrmlTraitsAssetRegistryAssetMetadata], {
+                assetId: CurioKusamaRuntimeCommonCurrencyId;
                 metadata: OrmlTraitsAssetRegistryAssetMetadata;
             }>;
             /**
@@ -228,101 +228,6 @@ declare module '@polkadot/api-base/types/events' {
              **/
             [key: string]: AugmentedEvent<ApiType>;
         };
-        bridge: {
-            /**
-             * The Ethereum account added to blacklist.
-             **/
-            BlacklistedEth: AugmentedEvent<ApiType, [account: H160], {
-                account: H160;
-            }>;
-            /**
-             * The Substrate account added to blacklist.
-             **/
-            BlacklistedSub: AugmentedEvent<ApiType, [account: AccountId32], {
-                account: AccountId32;
-            }>;
-            /**
-             * The tokens to be bridged have been burned.
-             **/
-            Burn: AugmentedEvent<ApiType, [requestId: u128, from: AccountId32, to: H160, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], {
-                requestId: u128;
-                from: AccountId32;
-                to: H160;
-                token: H160;
-                currencyId: CurioMainnetRuntimeCurrencyId;
-                amount: u128;
-            }>;
-            /**
-             * The currency added.
-             **/
-            CurrencyAdded: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], {
-                id: CurioMainnetRuntimeCurrencyId;
-            }>;
-            /**
-             * The currency paused.
-             **/
-            CurrencyPaused: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], {
-                id: CurioMainnetRuntimeCurrencyId;
-            }>;
-            /**
-             * The currency removed.
-             **/
-            CurrencyRemoved: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], {
-                id: CurioMainnetRuntimeCurrencyId;
-            }>;
-            /**
-             * The currency not paused.
-             **/
-            CurrencyUnpaused: AugmentedEvent<ApiType, [id: CurioMainnetRuntimeCurrencyId], {
-                id: CurioMainnetRuntimeCurrencyId;
-            }>;
-            /**
-             * The bridge manager added.
-             **/
-            ManagerAdded: AugmentedEvent<ApiType, [manager: AccountId32], {
-                manager: AccountId32;
-            }>;
-            /**
-             * The bridge manager removed.
-             **/
-            ManagerRemoved: AugmentedEvent<ApiType, [manager: AccountId32], {
-                manager: AccountId32;
-            }>;
-            /**
-             * The bridge tokens have been deposited.
-             **/
-            Mint: AugmentedEvent<ApiType, [requestId: u128, to: AccountId32, token: H160, currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], {
-                requestId: u128;
-                to: AccountId32;
-                token: H160;
-                currencyId: CurioMainnetRuntimeCurrencyId;
-                amount: u128;
-            }>;
-            /**
-             * The bridge operation is (already or still) paused.
-             **/
-            Paused: AugmentedEvent<ApiType, []>;
-            /**
-             * The Ethereum account removed from blacklist.
-             **/
-            RemovedFromBlacklistEth: AugmentedEvent<ApiType, [account: H160], {
-                account: H160;
-            }>;
-            /**
-             * The Substrate account removed from blacklist.
-             **/
-            RemovedFromBlacklistSub: AugmentedEvent<ApiType, [account: AccountId32], {
-                account: AccountId32;
-            }>;
-            /**
-             * The bridge operation is (already or still) resumed.
-             **/
-            Unpaused: AugmentedEvent<ApiType, []>;
-            /**
-             * Generic event
-             **/
-            [key: string]: AugmentedEvent<ApiType>;
-        };
         convictionVoting: {
             /**
              * An account has delegated their vote to another account. \[who, target\]
@@ -362,24 +267,24 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Deposited some balance into an account
              **/
-            Deposited: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Deposited: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * Dust swept.
              **/
-            DustSwept: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            DustSwept: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * Currency transfer success.
              **/
-            Transferred: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, from: AccountId32, to: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Transferred: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, from: AccountId32, to: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 from: AccountId32;
                 to: AccountId32;
                 amount: u128;
@@ -387,8 +292,8 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Withdrawn some balances from an account
              **/
-            Withdrawn: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Withdrawn: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
@@ -401,22 +306,22 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Add liquidity success.
              **/
-            AddLiquidity: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioMainnetRuntimeCurrencyId, pool0: u128, currency1: CurioMainnetRuntimeCurrencyId, pool1: u128, shareIncrement: u128], {
+            AddLiquidity: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioKusamaRuntimeCommonCurrencyId, pool0: u128, currency1: CurioKusamaRuntimeCommonCurrencyId, pool1: u128, shareIncrement: u128], {
                 who: AccountId32;
-                currency0: CurioMainnetRuntimeCurrencyId;
+                currency0: CurioKusamaRuntimeCommonCurrencyId;
                 pool0: u128;
-                currency1: CurioMainnetRuntimeCurrencyId;
+                currency1: CurioKusamaRuntimeCommonCurrencyId;
                 pool1: u128;
                 shareIncrement: u128;
             }>;
             /**
              * add provision success
              **/
-            AddProvision: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioMainnetRuntimeCurrencyId, contribution0: u128, currency1: CurioMainnetRuntimeCurrencyId, contribution1: u128], {
+            AddProvision: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioKusamaRuntimeCommonCurrencyId, contribution0: u128, currency1: CurioKusamaRuntimeCommonCurrencyId, contribution1: u128], {
                 who: AccountId32;
-                currency0: CurioMainnetRuntimeCurrencyId;
+                currency0: CurioKusamaRuntimeCommonCurrencyId;
                 contribution0: u128;
-                currency1: CurioMainnetRuntimeCurrencyId;
+                currency1: CurioKusamaRuntimeCommonCurrencyId;
                 contribution1: u128;
             }>;
             /**
@@ -457,30 +362,30 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * refund provision success
              **/
-            RefundProvision: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioMainnetRuntimeCurrencyId, contribution0: u128, currency1: CurioMainnetRuntimeCurrencyId, contribution1: u128], {
+            RefundProvision: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioKusamaRuntimeCommonCurrencyId, contribution0: u128, currency1: CurioKusamaRuntimeCommonCurrencyId, contribution1: u128], {
                 who: AccountId32;
-                currency0: CurioMainnetRuntimeCurrencyId;
+                currency0: CurioKusamaRuntimeCommonCurrencyId;
                 contribution0: u128;
-                currency1: CurioMainnetRuntimeCurrencyId;
+                currency1: CurioKusamaRuntimeCommonCurrencyId;
                 contribution1: u128;
             }>;
             /**
              * Remove liquidity from the trading pool success.
              **/
-            RemoveLiquidity: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioMainnetRuntimeCurrencyId, pool0: u128, currency1: CurioMainnetRuntimeCurrencyId, pool1: u128, shareDecrement: u128], {
+            RemoveLiquidity: AugmentedEvent<ApiType, [who: AccountId32, currency0: CurioKusamaRuntimeCommonCurrencyId, pool0: u128, currency1: CurioKusamaRuntimeCommonCurrencyId, pool1: u128, shareDecrement: u128], {
                 who: AccountId32;
-                currency0: CurioMainnetRuntimeCurrencyId;
+                currency0: CurioKusamaRuntimeCommonCurrencyId;
                 pool0: u128;
-                currency1: CurioMainnetRuntimeCurrencyId;
+                currency1: CurioKusamaRuntimeCommonCurrencyId;
                 pool1: u128;
                 shareDecrement: u128;
             }>;
             /**
              * Use supply currency to swap target currency.
              **/
-            Swap: AugmentedEvent<ApiType, [trader: AccountId32, path: Vec<CurioMainnetRuntimeCurrencyId>, liquidityChanges: Vec<u128>], {
+            Swap: AugmentedEvent<ApiType, [trader: AccountId32, path: Vec<CurioKusamaRuntimeCommonCurrencyId>, liquidityChanges: Vec<u128>], {
                 trader: AccountId32;
-                path: Vec<CurioMainnetRuntimeCurrencyId>;
+                path: Vec<CurioKusamaRuntimeCommonCurrencyId>;
                 liquidityChanges: Vec<u128>;
             }>;
             /**
@@ -785,35 +690,35 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Claim rewards.
              **/
-            ClaimRewards: AugmentedEvent<ApiType, [who: AccountId32, pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, actualAmount: u128, deductionAmount: u128], {
+            ClaimRewards: AugmentedEvent<ApiType, [who: AccountId32, pool: PalletIncentivesPoolId, rewardCurrencyId: CurioKusamaRuntimeCommonCurrencyId, actualAmount: u128, deductionAmount: u128], {
                 who: AccountId32;
                 pool: PalletIncentivesPoolId;
-                rewardCurrencyId: CurioMainnetRuntimeCurrencyId;
+                rewardCurrencyId: CurioKusamaRuntimeCommonCurrencyId;
                 actualAmount: u128;
                 deductionAmount: u128;
             }>;
             /**
              * Deposit DEX share.
              **/
-            DepositDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, deposit: u128], {
+            DepositDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioKusamaRuntimeCommonCurrencyId, deposit: u128], {
                 who: AccountId32;
-                dexShareType: CurioMainnetRuntimeCurrencyId;
+                dexShareType: CurioKusamaRuntimeCommonCurrencyId;
                 deposit: u128;
             }>;
             /**
              * Incentive reward amount updated.
              **/
-            IncentiveRewardAmountUpdated: AugmentedEvent<ApiType, [pool: PalletIncentivesPoolId, rewardCurrencyId: CurioMainnetRuntimeCurrencyId, rewardAmountPerPeriod: u128], {
+            IncentiveRewardAmountUpdated: AugmentedEvent<ApiType, [pool: PalletIncentivesPoolId, rewardCurrencyId: CurioKusamaRuntimeCommonCurrencyId, rewardAmountPerPeriod: u128], {
                 pool: PalletIncentivesPoolId;
-                rewardCurrencyId: CurioMainnetRuntimeCurrencyId;
+                rewardCurrencyId: CurioKusamaRuntimeCommonCurrencyId;
                 rewardAmountPerPeriod: u128;
             }>;
             /**
              * Withdraw DEX share.
              **/
-            WithdrawDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioMainnetRuntimeCurrencyId, withdraw: u128], {
+            WithdrawDexShare: AugmentedEvent<ApiType, [who: AccountId32, dexShareType: CurioKusamaRuntimeCommonCurrencyId, withdraw: u128], {
                 who: AccountId32;
-                dexShareType: CurioMainnetRuntimeCurrencyId;
+                dexShareType: CurioKusamaRuntimeCommonCurrencyId;
                 withdraw: u128;
             }>;
             /**
@@ -1310,10 +1215,10 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * A proxy was added.
              **/
-            ProxyAdded: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: CurioMainnetRuntimeUtilitiesProxyType, delay: u64], {
+            ProxyAdded: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, delay: u64], {
                 delegator: AccountId32;
                 delegatee: AccountId32;
-                proxyType: CurioMainnetRuntimeUtilitiesProxyType;
+                proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType;
                 delay: u64;
             }>;
             /**
@@ -1325,20 +1230,20 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * A proxy was removed.
              **/
-            ProxyRemoved: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: CurioMainnetRuntimeUtilitiesProxyType, delay: u64], {
+            ProxyRemoved: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, delay: u64], {
                 delegator: AccountId32;
                 delegatee: AccountId32;
-                proxyType: CurioMainnetRuntimeUtilitiesProxyType;
+                proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType;
                 delay: u64;
             }>;
             /**
              * A pure account has been created by new proxy with given
              * disambiguation index and proxy type.
              **/
-            PureCreated: AugmentedEvent<ApiType, [pure: AccountId32, who: AccountId32, proxyType: CurioMainnetRuntimeUtilitiesProxyType, disambiguationIndex: u16], {
+            PureCreated: AugmentedEvent<ApiType, [pure: AccountId32, who: AccountId32, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, disambiguationIndex: u16], {
                 pure: AccountId32;
                 who: AccountId32;
-                proxyType: CurioMainnetRuntimeUtilitiesProxyType;
+                proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType;
                 disambiguationIndex: u16;
             }>;
             /**
@@ -1593,8 +1498,8 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * A balance was set by root.
              **/
-            BalanceSet: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, free: u128, reserved: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            BalanceSet: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, free: u128, reserved: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 free: u128;
                 reserved: u128;
@@ -1602,8 +1507,8 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Deposited some balance into an account
              **/
-            Deposited: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Deposited: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
@@ -1611,57 +1516,57 @@ declare module '@polkadot/api-base/types/events' {
              * An account was removed whose balance was non-zero but below
              * ExistentialDeposit, resulting in an outright loss.
              **/
-            DustLost: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            DustLost: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * An account was created with some free balance.
              **/
-            Endowed: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Endowed: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
-            Issued: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Issued: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 amount: u128;
             }>;
             /**
              * Some free balance was locked.
              **/
-            Locked: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Locked: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * Some locked funds were unlocked
              **/
-            LockRemoved: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32], {
+            LockRemoved: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32], {
                 lockId: U8aFixed;
-                currencyId: CurioMainnetRuntimeCurrencyId;
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
             }>;
             /**
              * Some funds are locked
              **/
-            LockSet: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
+            LockSet: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
                 lockId: U8aFixed;
-                currencyId: CurioMainnetRuntimeCurrencyId;
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
-            Rescinded: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Rescinded: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 amount: u128;
             }>;
             /**
              * Some balance was reserved (moved from free to reserved).
              **/
-            Reserved: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Reserved: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
@@ -1669,8 +1574,8 @@ declare module '@polkadot/api-base/types/events' {
              * Some reserved balance was repatriated (moved from reserved to
              * another account).
              **/
-            ReserveRepatriated: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, from: AccountId32, to: AccountId32, amount: u128, status: FrameSupportTokensMiscBalanceStatus], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            ReserveRepatriated: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, from: AccountId32, to: AccountId32, amount: u128, status: FrameSupportTokensMiscBalanceStatus], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 from: AccountId32;
                 to: AccountId32;
                 amount: u128;
@@ -1679,8 +1584,8 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Some balances were slashed (e.g. due to mis-behavior)
              **/
-            Slashed: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, freeAmount: u128, reservedAmount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Slashed: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, freeAmount: u128, reservedAmount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 freeAmount: u128;
                 reservedAmount: u128;
@@ -1688,15 +1593,15 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * The total issuance of an currency has been set
              **/
-            TotalIssuanceSet: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            TotalIssuanceSet: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 amount: u128;
             }>;
             /**
              * Transfer succeeded.
              **/
-            Transfer: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, from: AccountId32, to: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Transfer: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, from: AccountId32, to: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 from: AccountId32;
                 to: AccountId32;
                 amount: u128;
@@ -1704,24 +1609,24 @@ declare module '@polkadot/api-base/types/events' {
             /**
              * Some locked balance was freed.
              **/
-            Unlocked: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Unlocked: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * Some balance was unreserved (moved from reserved to free).
              **/
-            Unreserved: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Unreserved: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
             /**
              * Some balances were withdrawn (e.g. pay for transaction fee)
              **/
-            Withdrawn: AugmentedEvent<ApiType, [currencyId: CurioMainnetRuntimeCurrencyId, who: AccountId32, amount: u128], {
-                currencyId: CurioMainnetRuntimeCurrencyId;
+            Withdrawn: AugmentedEvent<ApiType, [currencyId: CurioKusamaRuntimeCommonCurrencyId, who: AccountId32, amount: u128], {
+                currencyId: CurioKusamaRuntimeCommonCurrencyId;
                 who: AccountId32;
                 amount: u128;
             }>;
