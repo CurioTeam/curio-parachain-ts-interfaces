@@ -3,7 +3,7 @@ import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
 import type { Option, Vec, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, Permill, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CurioMainnetRuntimeCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, PalletReferendaTrackInfo, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
+import type { CurioKusamaRuntimeCommonCurrencyId, FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, PalletReferendaTrackInfo, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
 declare module '@polkadot/api-base/types/consts' {
     interface AugmentedConsts<ApiType extends ApiTypes> {
@@ -98,16 +98,6 @@ declare module '@polkadot/api-base/types/consts' {
              **/
             [key: string]: Codec;
         };
-        bridge: {
-            /**
-             * The native currency identifier.
-             **/
-            getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
-            /**
-             * Generic const
-             **/
-            [key: string]: Codec;
-        };
         convictionVoting: {
             /**
              * The maximum number of concurrent votes an account may have.
@@ -132,7 +122,7 @@ declare module '@polkadot/api-base/types/consts' {
             /**
              * The native currency id
              **/
-            getNativeCurrencyId: CurioMainnetRuntimeCurrencyId & AugmentedConst<ApiType>;
+            getNativeCurrencyId: CurioKusamaRuntimeCommonCurrencyId & AugmentedConst<ApiType>;
             /**
              * Generic const
              **/

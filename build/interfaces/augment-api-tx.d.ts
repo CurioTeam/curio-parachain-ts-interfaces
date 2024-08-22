@@ -3,8 +3,8 @@ import type { ApiTypes, AugmentedSubmittable, SubmittableExtrinsic, SubmittableE
 import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Option, U8aFixed, Vec, bool, i128, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, Call, H160, H256, MultiAddress, Perquintill } from '@polkadot/types/interfaces/runtime';
-import type { CumulusPrimitivesParachainInherentParachainInherentData, CurioCommonRuntimeXcmConfigCustomMetadata, CurioMainnetRuntimeConsensusSessionKeys, CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeOriginCaller, CurioMainnetRuntimeUtilitiesProxyType, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime, OrmlTraitsAssetRegistryAssetMetadata, PalletBridgeMintData, PalletConvictionVotingConviction, PalletConvictionVotingVoteAccountVote, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIncentivesPoolId, PalletMultisigTimepoint, PalletVestingVestingInfo, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmV3WeightLimit, StagingXcmVersionedMultiAsset, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation, StagingXcmVersionedXcm } from '@polkadot/types/lookup';
+import type { AccountId32, Call, H256, MultiAddress, Perquintill } from '@polkadot/types/interfaces/runtime';
+import type { CumulusPrimitivesParachainInherentParachainInherentData, CurioKusamaRuntimeCommonConfigsConsensusSessionKeys, CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, CurioKusamaRuntimeCommonConfigsXcmTypesCustomMetadata, CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeOriginCaller, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime, OrmlTraitsAssetRegistryAssetMetadata, PalletConvictionVotingConviction, PalletConvictionVotingVoteAccountVote, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIncentivesPoolId, PalletMultisigTimepoint, PalletVestingVestingInfo, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmV3WeightLimit, StagingXcmVersionedMultiAsset, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation, StagingXcmVersionedXcm } from '@polkadot/types/lookup';
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
 export type __SubmittableExtrinsic<ApiType extends ApiTypes> = SubmittableExtrinsic<ApiType>;
 export type __SubmittableExtrinsicFunction<ApiType extends ApiTypes> = SubmittableExtrinsicFunction<ApiType>;
@@ -21,17 +21,17 @@ declare module '@polkadot/api-base/types/submittable' {
                 existentialDeposit?: any;
                 location?: any;
                 additional?: any;
-            } | string | Uint8Array, assetId: Option<CurioMainnetRuntimeCurrencyId> | null | Uint8Array | CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, assetId: Option<CurioKusamaRuntimeCommonCurrencyId> | null | Uint8Array | CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<CurioMainnetRuntimeCurrencyId>]>;
+            } | string) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<CurioKusamaRuntimeCommonCurrencyId>]>;
             /**
              * See [`Pallet::update_asset`].
              **/
-            updateAsset: AugmentedSubmittable<(assetId: CurioMainnetRuntimeCurrencyId | {
+            updateAsset: AugmentedSubmittable<(assetId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
@@ -41,9 +41,9 @@ declare module '@polkadot/api-base/types/submittable' {
                 V2: any;
             } | {
                 V3: any;
-            } | string, additional: Option<CurioCommonRuntimeXcmConfigCustomMetadata> | null | Uint8Array | CurioCommonRuntimeXcmConfigCustomMetadata | {
+            } | string, additional: Option<CurioKusamaRuntimeCommonConfigsXcmTypesCustomMetadata> | null | Uint8Array | CurioKusamaRuntimeCommonConfigsXcmTypesCustomMetadata | {
                 feePerSecond?: any;
-            } | string) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, Option<u32>, Option<Bytes>, Option<Bytes>, Option<u128>, Option<Option<StagingXcmVersionedMultiLocation>>, Option<CurioCommonRuntimeXcmConfigCustomMetadata>]>;
+            } | string) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, Option<u32>, Option<Bytes>, Option<Bytes>, Option<u128>, Option<Option<StagingXcmVersionedMultiLocation>>, Option<CurioKusamaRuntimeCommonConfigsXcmTypesCustomMetadata>]>;
             /**
              * Generic tx
              **/
@@ -243,81 +243,6 @@ declare module '@polkadot/api-base/types/submittable' {
              **/
             [key: string]: SubmittableExtrinsicFunction<ApiType>;
         };
-        bridge: {
-            /**
-             * See [`Pallet::add_supported_currency`].
-             **/
-            addSupportedCurrency: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
-                Token: any;
-            } | {
-                DexShare: any;
-            } | {
-                ForeignAsset: any;
-            } | string | Uint8Array, token: H160 | string | Uint8Array, pause: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, H160, bool]>;
-            /**
-             * See [`Pallet::batch_mint`].
-             **/
-            batchMint: AugmentedSubmittable<(data: Vec<PalletBridgeMintData> | (PalletBridgeMintData | {
-                requestId?: any;
-                to?: any;
-                token?: any;
-                amount?: any;
-            } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<PalletBridgeMintData>]>;
-            /**
-             * See [`Pallet::burn`].
-             **/
-            burn: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
-                Token: any;
-            } | {
-                DexShare: any;
-            } | {
-                ForeignAsset: any;
-            } | string | Uint8Array, to: H160 | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, H160, u128]>;
-            /**
-             * See [`Pallet::mint`].
-             **/
-            mint: AugmentedSubmittable<(requestId: u128 | AnyNumber | Uint8Array, to: AccountId32 | string | Uint8Array, token: H160 | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128, AccountId32, H160, u128]>;
-            /**
-             * See [`Pallet::remove_supported_currency`].
-             **/
-            removeSupportedCurrency: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
-                Token: any;
-            } | {
-                DexShare: any;
-            } | {
-                ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId]>;
-            /**
-             * See [`Pallet::set_currency_pause`].
-             **/
-            setCurrencyPause: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
-                Token: any;
-            } | {
-                DexShare: any;
-            } | {
-                ForeignAsset: any;
-            } | string | Uint8Array, pause: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, bool]>;
-            /**
-             * See [`Pallet::set_eth_blacklist`].
-             **/
-            setEthBlacklist: AugmentedSubmittable<(account: H160 | string | Uint8Array, blacklisted: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [H160, bool]>;
-            /**
-             * See [`Pallet::set_full_pause`].
-             **/
-            setFullPause: AugmentedSubmittable<(pause: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [bool]>;
-            /**
-             * See [`Pallet::set_manager`].
-             **/
-            setManager: AugmentedSubmittable<(manager: AccountId32 | string | Uint8Array, isManager: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, bool]>;
-            /**
-             * See [`Pallet::set_sub_blacklist`].
-             **/
-            setSubBlacklist: AugmentedSubmittable<(account: AccountId32 | string | Uint8Array, blacklisted: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, bool]>;
-            /**
-             * Generic tx
-             **/
-            [key: string]: SubmittableExtrinsicFunction<ApiType>;
-        };
         convictionVoting: {
             /**
              * See [`Pallet::delegate`].
@@ -388,13 +313,13 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::sweep_dust`].
              **/
-            sweepDust: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
+            sweepDust: AugmentedSubmittable<(currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, accounts: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, Vec<AccountId32>]>;
+            } | string | Uint8Array, accounts: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, Vec<AccountId32>]>;
             /**
              * See [`Pallet::transfer`].
              **/
@@ -408,13 +333,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * See [`Pallet::transfer_native_currency`].
              **/
@@ -442,13 +367,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: i128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, i128]>;
+            } | string | Uint8Array, amount: i128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, i128]>;
             /**
              * Generic tx
              **/
@@ -458,199 +383,199 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::abort_provisioning`].
              **/
-            abortProvisioning: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            abortProvisioning: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::add_liquidity`].
              **/
-            addLiquidity: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            addLiquidity: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, maxAmountA: Compact<u128> | AnyNumber | Uint8Array, maxAmountB: Compact<u128> | AnyNumber | Uint8Array, minShareIncrement: Compact<u128> | AnyNumber | Uint8Array, stakeIncrementShare: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, bool]>;
+            } | string | Uint8Array, maxAmountA: Compact<u128> | AnyNumber | Uint8Array, maxAmountB: Compact<u128> | AnyNumber | Uint8Array, minShareIncrement: Compact<u128> | AnyNumber | Uint8Array, stakeIncrementShare: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, bool]>;
             /**
              * See [`Pallet::add_provision`].
              **/
-            addProvision: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            addProvision: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amountA: Compact<u128> | AnyNumber | Uint8Array, amountB: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>]>;
+            } | string | Uint8Array, amountA: Compact<u128> | AnyNumber | Uint8Array, amountB: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>]>;
             /**
              * See [`Pallet::claim_dex_share`].
              **/
-            claimDexShare: AugmentedSubmittable<(owner: AccountId32 | string | Uint8Array, currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            claimDexShare: AugmentedSubmittable<(owner: AccountId32 | string | Uint8Array, currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::disable_trading_pair`].
              **/
-            disableTradingPair: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            disableTradingPair: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::enable_trading_pair`].
              **/
-            enableTradingPair: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            enableTradingPair: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::end_provisioning`].
              **/
-            endProvisioning: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            endProvisioning: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::list_provisioning`].
              **/
-            listProvisioning: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            listProvisioning: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, minContributionA: Compact<u128> | AnyNumber | Uint8Array, minContributionB: Compact<u128> | AnyNumber | Uint8Array, targetProvisionA: Compact<u128> | AnyNumber | Uint8Array, targetProvisionB: Compact<u128> | AnyNumber | Uint8Array, notBefore: Compact<u64> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u64>]>;
+            } | string | Uint8Array, minContributionA: Compact<u128> | AnyNumber | Uint8Array, minContributionB: Compact<u128> | AnyNumber | Uint8Array, targetProvisionA: Compact<u128> | AnyNumber | Uint8Array, targetProvisionB: Compact<u128> | AnyNumber | Uint8Array, notBefore: Compact<u64> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u64>]>;
             /**
              * See [`Pallet::refund_provision`].
              **/
-            refundProvision: AugmentedSubmittable<(owner: AccountId32 | string | Uint8Array, currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            refundProvision: AugmentedSubmittable<(owner: AccountId32 | string | Uint8Array, currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId]>;
             /**
              * See [`Pallet::remove_liquidity`].
              **/
-            removeLiquidity: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            removeLiquidity: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, removeShare: Compact<u128> | AnyNumber | Uint8Array, minWithdrawnA: Compact<u128> | AnyNumber | Uint8Array, minWithdrawnB: Compact<u128> | AnyNumber | Uint8Array, byUnstake: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, bool]>;
+            } | string | Uint8Array, removeShare: Compact<u128> | AnyNumber | Uint8Array, minWithdrawnA: Compact<u128> | AnyNumber | Uint8Array, minWithdrawnB: Compact<u128> | AnyNumber | Uint8Array, byUnstake: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, bool]>;
             /**
              * See [`Pallet::swap_with_exact_supply`].
              **/
-            swapWithExactSupply: AugmentedSubmittable<(path: Vec<CurioMainnetRuntimeCurrencyId> | (CurioMainnetRuntimeCurrencyId | {
+            swapWithExactSupply: AugmentedSubmittable<(path: Vec<CurioKusamaRuntimeCommonCurrencyId> | (CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array)[], supplyAmount: Compact<u128> | AnyNumber | Uint8Array, minTargetAmount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<CurioMainnetRuntimeCurrencyId>, Compact<u128>, Compact<u128>]>;
+            } | string | Uint8Array)[], supplyAmount: Compact<u128> | AnyNumber | Uint8Array, minTargetAmount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<CurioKusamaRuntimeCommonCurrencyId>, Compact<u128>, Compact<u128>]>;
             /**
              * See [`Pallet::swap_with_exact_target`].
              **/
-            swapWithExactTarget: AugmentedSubmittable<(path: Vec<CurioMainnetRuntimeCurrencyId> | (CurioMainnetRuntimeCurrencyId | {
+            swapWithExactTarget: AugmentedSubmittable<(path: Vec<CurioKusamaRuntimeCommonCurrencyId> | (CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array)[], targetAmount: Compact<u128> | AnyNumber | Uint8Array, maxSupplyAmount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<CurioMainnetRuntimeCurrencyId>, Compact<u128>, Compact<u128>]>;
+            } | string | Uint8Array)[], targetAmount: Compact<u128> | AnyNumber | Uint8Array, maxSupplyAmount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<CurioKusamaRuntimeCommonCurrencyId>, Compact<u128>, Compact<u128>]>;
             /**
              * See [`Pallet::update_provisioning_parameters`].
              **/
-            updateProvisioningParameters: AugmentedSubmittable<(currencyIdA: CurioMainnetRuntimeCurrencyId | {
+            updateProvisioningParameters: AugmentedSubmittable<(currencyIdA: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, currencyIdB: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyIdB: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, minContributionA: Compact<u128> | AnyNumber | Uint8Array, minContributionB: Compact<u128> | AnyNumber | Uint8Array, targetProvisionA: Compact<u128> | AnyNumber | Uint8Array, targetProvisionB: Compact<u128> | AnyNumber | Uint8Array, notBefore: Compact<u64> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u64>]>;
+            } | string | Uint8Array, minContributionA: Compact<u128> | AnyNumber | Uint8Array, minContributionB: Compact<u128> | AnyNumber | Uint8Array, targetProvisionA: Compact<u128> | AnyNumber | Uint8Array, targetProvisionB: Compact<u128> | AnyNumber | Uint8Array, notBefore: Compact<u64> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u128>, Compact<u64>]>;
             /**
              * Generic tx
              **/
@@ -775,7 +700,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::submit`].
              **/
-            submit: AugmentedSubmittable<(proposalOrigin: CurioMainnetRuntimeOriginCaller | {
+            submit: AugmentedSubmittable<(proposalOrigin: CurioKusamaRuntimeOriginCaller | {
                 system: any;
             } | {
                 Void: any;
@@ -795,7 +720,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 At: any;
             } | {
                 After: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeOriginCaller, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeOriginCaller, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime]>;
             /**
              * Generic tx
              **/
@@ -1007,13 +932,13 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::deposit_dex_share`].
              **/
-            depositDexShare: AugmentedSubmittable<(lpCurrencyId: CurioMainnetRuntimeCurrencyId | {
+            depositDexShare: AugmentedSubmittable<(lpCurrencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * See [`Pallet::update_claim_reward_deduction_rates`].
              **/
@@ -1023,25 +948,25 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::update_incentive_rewards`].
              **/
-            updateIncentiveRewards: AugmentedSubmittable<(updates: Vec<ITuple<[PalletIncentivesPoolId, Vec<ITuple<[CurioMainnetRuntimeCurrencyId, u128]>>]>> | ([PalletIncentivesPoolId | {
+            updateIncentiveRewards: AugmentedSubmittable<(updates: Vec<ITuple<[PalletIncentivesPoolId, Vec<ITuple<[CurioKusamaRuntimeCommonCurrencyId, u128]>>]>> | ([PalletIncentivesPoolId | {
                 Dex: any;
-            } | string | Uint8Array, Vec<ITuple<[CurioMainnetRuntimeCurrencyId, u128]>> | ([CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, Vec<ITuple<[CurioKusamaRuntimeCommonCurrencyId, u128]>> | ([CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, u128 | AnyNumber | Uint8Array])[]])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[PalletIncentivesPoolId, Vec<ITuple<[CurioMainnetRuntimeCurrencyId, u128]>>]>>]>;
+            } | string | Uint8Array, u128 | AnyNumber | Uint8Array])[]])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[PalletIncentivesPoolId, Vec<ITuple<[CurioKusamaRuntimeCommonCurrencyId, u128]>>]>>]>;
             /**
              * See [`Pallet::withdraw_dex_share`].
              **/
-            withdrawDexShare: AugmentedSubmittable<(lpCurrencyId: CurioMainnetRuntimeCurrencyId | {
+            withdrawDexShare: AugmentedSubmittable<(lpCurrencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * Generic tx
              **/
@@ -1455,7 +1380,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, proxyType: CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeUtilitiesProxyType, u64]>;
+            } | string | Uint8Array, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, u64]>;
             /**
              * See [`Pallet::announce`].
              **/
@@ -1473,7 +1398,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::create_pure`].
              **/
-            createPure: AugmentedSubmittable<(proxyType: CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array, index: u16 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeUtilitiesProxyType, u64, u16]>;
+            createPure: AugmentedSubmittable<(proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array, index: u16 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, u64, u16]>;
             /**
              * See [`Pallet::kill_pure`].
              **/
@@ -1487,7 +1412,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, proxyType: CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, index: u16 | AnyNumber | Uint8Array, height: Compact<u64> | AnyNumber | Uint8Array, extIndex: Compact<u32> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeUtilitiesProxyType, u16, Compact<u64>, Compact<u32>]>;
+            } | string | Uint8Array, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, index: u16 | AnyNumber | Uint8Array, height: Compact<u64> | AnyNumber | Uint8Array, extIndex: Compact<u32> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, u16, Compact<u64>, Compact<u32>]>;
             /**
              * See [`Pallet::proxy`].
              **/
@@ -1501,7 +1426,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, forceProxyType: Option<CurioMainnetRuntimeUtilitiesProxyType> | null | Uint8Array | CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Option<CurioMainnetRuntimeUtilitiesProxyType>, Call]>;
+            } | string | Uint8Array, forceProxyType: Option<CurioKusamaRuntimeCommonConfigsUtilitiesProxyType> | null | Uint8Array | CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Option<CurioKusamaRuntimeCommonConfigsUtilitiesProxyType>, Call]>;
             /**
              * See [`Pallet::proxy_announced`].
              **/
@@ -1525,7 +1450,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, forceProxyType: Option<CurioMainnetRuntimeUtilitiesProxyType> | null | Uint8Array | CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, Option<CurioMainnetRuntimeUtilitiesProxyType>, Call]>;
+            } | string | Uint8Array, forceProxyType: Option<CurioKusamaRuntimeCommonConfigsUtilitiesProxyType> | null | Uint8Array | CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, Option<CurioKusamaRuntimeCommonConfigsUtilitiesProxyType>, Call]>;
             /**
              * See [`Pallet::reject_announcement`].
              **/
@@ -1571,7 +1496,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, proxyType: CurioMainnetRuntimeUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeUtilitiesProxyType, u64]>;
+            } | string | Uint8Array, proxyType: CurioKusamaRuntimeCommonConfigsUtilitiesProxyType | 'Any' | 'NonTransfer' | 'Governance' | 'Staking' | number | Uint8Array, delay: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonConfigsUtilitiesProxyType, u64]>;
             /**
              * Generic tx
              **/
@@ -1613,7 +1538,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::submit`].
              **/
-            submit: AugmentedSubmittable<(proposalOrigin: CurioMainnetRuntimeOriginCaller | {
+            submit: AugmentedSubmittable<(proposalOrigin: CurioKusamaRuntimeOriginCaller | {
                 system: any;
             } | {
                 Void: any;
@@ -1633,7 +1558,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 At: any;
             } | {
                 After: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeOriginCaller, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeOriginCaller, FrameSupportPreimagesBounded, FrameSupportScheduleDispatchTime]>;
             /**
              * Generic tx
              **/
@@ -1677,9 +1602,9 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::set_keys`].
              **/
-            setKeys: AugmentedSubmittable<(keys: CurioMainnetRuntimeConsensusSessionKeys | {
+            setKeys: AugmentedSubmittable<(keys: CurioKusamaRuntimeCommonConfigsConsensusSessionKeys | {
                 aura?: any;
-            } | string | Uint8Array, proof: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeConsensusSessionKeys, Bytes]>;
+            } | string | Uint8Array, proof: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonConfigsConsensusSessionKeys, Bytes]>;
             /**
              * Generic tx
              **/
@@ -1802,13 +1727,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * See [`Pallet::set_balance`].
              **/
@@ -1822,13 +1747,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, Compact<u128>, Compact<u128>]>;
+            } | string | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>, Compact<u128>]>;
             /**
              * See [`Pallet::transfer`].
              **/
@@ -1842,13 +1767,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * See [`Pallet::transfer_all`].
              **/
@@ -1862,13 +1787,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, bool]>;
+            } | string | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, bool]>;
             /**
              * See [`Pallet::transfer_keep_alive`].
              **/
@@ -1882,13 +1807,13 @@ declare module '@polkadot/api-base/types/submittable' {
                 Address32: any;
             } | {
                 Address20: any;
-            } | string | Uint8Array, currencyId: CurioMainnetRuntimeCurrencyId | {
+            } | string | Uint8Array, currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
             } | {
                 ForeignAsset: any;
-            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioMainnetRuntimeCurrencyId, Compact<u128>]>;
+            } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, CurioKusamaRuntimeCommonCurrencyId, Compact<u128>]>;
             /**
              * Generic tx
              **/
@@ -1970,7 +1895,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::dispatch_as`].
              **/
-            dispatchAs: AugmentedSubmittable<(asOrigin: CurioMainnetRuntimeOriginCaller | {
+            dispatchAs: AugmentedSubmittable<(asOrigin: CurioKusamaRuntimeOriginCaller | {
                 system: any;
             } | {
                 Void: any;
@@ -1980,7 +1905,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 PolkadotXcm: any;
             } | {
                 CumulusXcm: any;
-            } | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeOriginCaller, Call]>;
+            } | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeOriginCaller, Call]>;
             /**
              * See [`Pallet::force_batch`].
              **/
@@ -2154,7 +2079,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::transfer`].
              **/
-            transfer: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
+            transfer: AugmentedSubmittable<(currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
@@ -2168,7 +2093,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Unlimited: any;
             } | {
                 Limited: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, u128, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, u128, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
             /**
              * See [`Pallet::transfer_multiasset`].
              **/
@@ -2224,7 +2149,7 @@ declare module '@polkadot/api-base/types/submittable' {
             /**
              * See [`Pallet::transfer_multicurrencies`].
              **/
-            transferMulticurrencies: AugmentedSubmittable<(currencies: Vec<ITuple<[CurioMainnetRuntimeCurrencyId, u128]>> | ([CurioMainnetRuntimeCurrencyId | {
+            transferMulticurrencies: AugmentedSubmittable<(currencies: Vec<ITuple<[CurioKusamaRuntimeCommonCurrencyId, u128]>> | ([CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
@@ -2238,11 +2163,11 @@ declare module '@polkadot/api-base/types/submittable' {
                 Unlimited: any;
             } | {
                 Limited: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[CurioMainnetRuntimeCurrencyId, u128]>>, u32, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[CurioKusamaRuntimeCommonCurrencyId, u128]>>, u32, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
             /**
              * See [`Pallet::transfer_with_fee`].
              **/
-            transferWithFee: AugmentedSubmittable<(currencyId: CurioMainnetRuntimeCurrencyId | {
+            transferWithFee: AugmentedSubmittable<(currencyId: CurioKusamaRuntimeCommonCurrencyId | {
                 Token: any;
             } | {
                 DexShare: any;
@@ -2256,7 +2181,7 @@ declare module '@polkadot/api-base/types/submittable' {
                 Unlimited: any;
             } | {
                 Limited: any;
-            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioMainnetRuntimeCurrencyId, u128, u128, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
+            } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurioKusamaRuntimeCommonCurrencyId, u128, u128, StagingXcmVersionedMultiLocation, StagingXcmV3WeightLimit]>;
             /**
              * Generic tx
              **/
